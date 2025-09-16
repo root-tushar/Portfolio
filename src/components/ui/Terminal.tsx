@@ -5,8 +5,17 @@ import { motion, useDragControls } from "framer-motion";
 import { Terminal as TerminalIcon, X, ArrowRight } from "lucide-react";
 import { useInteractive } from "@/components/providers/interactive-provider";
 
-export default function Terminal() {
+interface TerminalProps {
+  onClose?: () => void
+}
+
+export default function Terminal({ onClose }: TerminalProps) {
   const { isTerminalOpen, closeTerminal } = useInteractive();
+  
+  const handleClose = () => {
+    closeTerminal();
+    onClose?.();
+  };
   
   // Don't render if terminal is not open
   if (!isTerminalOpen) return null;

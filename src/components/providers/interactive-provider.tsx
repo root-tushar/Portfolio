@@ -8,6 +8,7 @@ import {
   useEffect,
   ReactNode
 } from 'react'
+import { SoundEffect } from '@/types/interactive'
 
 interface InteractiveContextType {
   isTerminalOpen: boolean
@@ -18,7 +19,7 @@ interface InteractiveContextType {
   closeChatbot: () => void
   soundEnabled: boolean
   toggleSound: () => void
-  playSoundEffect: (type: 'hover' | 'click' | 'error' | 'success') => void
+  playSoundEffect: (type: SoundEffect) => void
   matrixMode: boolean
   toggleMatrixMode: () => void
 }
@@ -152,7 +153,7 @@ export function InteractiveProvider({ children }: InteractiveProviderProps) {
   // Expose context to window for Terminal and Chatbot components
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      window.interactiveContext = {
+      const context: InteractiveContext = {
         isTerminalOpen,
         isChatbotOpen,
         openTerminal,

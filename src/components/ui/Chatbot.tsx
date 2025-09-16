@@ -5,7 +5,11 @@ import { motion, useDragControls } from "framer-motion";
 import { useInteractive } from '@/components/providers/interactive-provider';
 import { X, Send, Bot } from 'lucide-react';
 
-export default function Chatbot() {
+interface ChatbotProps {
+  onClose?: () => void
+}
+
+export default function Chatbot({ onClose }: ChatbotProps) {
   const { isChatbotOpen, closeChatbot, playSoundEffect } = useInteractive();
   const [messages, setMessages] = useState<Array<{text: string, sender: 'user' | 'bot'}>>([
     { text: "Hello! How can I assist you with your cybersecurity needs today?", sender: 'bot' }
@@ -34,7 +38,7 @@ export default function Chatbot() {
     if (!input.trim()) return;
     
     // Play sound effect
-    playSoundEffect('send');
+    playSoundEffect("send" as SoundEffect);
     
     // Add user message
     setMessages(prev => [...prev, { text: input, sender: 'user' }]);

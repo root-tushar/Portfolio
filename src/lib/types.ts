@@ -57,6 +57,16 @@ export interface CaseStudy {
   }[]
 }
 
+export interface PricingTier {
+  id: string
+  name: string
+  description: string
+  price: number
+  features: string[]
+  isPopular?: boolean
+  category: 'ai' | 'cybersecurity'
+}
+
 export interface BlogPost {
   id: string
   title: string
