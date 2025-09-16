@@ -48,10 +48,9 @@ export interface CaseStudy {
     quote: string
     author: string
     role?: string
-  }
-  images?: string[]
     company?: string
   }
+  images?: string[]
 }
 
 export interface BlogPost {
