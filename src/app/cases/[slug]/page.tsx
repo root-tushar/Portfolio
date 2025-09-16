@@ -1,0 +1,202 @@
+'use client'
+
+import { ArrowLeft, Calendar, User } from 'lucide-react'
+import Link from 'next/link'
+import { motion } from 'framer-motion'
+import { notFound } from 'next/navigation'
+import { useEffect } from 'react'
+import { caseStudies } from '@/lib/data'
+import { Footer } from '@/components/Footer'
+import { Nav } from '@/components/Nav'
+import { ContentSection } from '@/components/cases/ContentSection'
+import { CaseStudyMetrics } from '@/components/cases/CaseStudyMetrics'
+import { CaseStudyTags } from '@/components/cases/CaseStudyTags'
+import { CaseStudyTestimonial } from '@/components/cases/CaseStudyTestimonial'
+import { CaseStudyImageGallery } from '@/components/cases/CaseStudyImageGallery'
+import React from 'react'
+
+interface PageProps {
+  params: {
+    slug: string
+  }
+}
+
+const fadeInUpVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.6 }
+  }
+}
+
+const fadeInUpDelayedVariants = (delay: number) => ({
+  hidden: { opacity: 0, y: 20 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.6, delay }
+  }
+})
+
+export default function CaseStudyPage({ params }: PageProps) {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
+  if (!params?.slug) {
+    notFound()
+  }
+
+  const caseStudy = caseStudies.find(cs => cs.id === params.slug)
+  
+  if (!caseStudy) {
+    notFound()
+  }
+
+  const sections = caseStudy.content.split('\n# ').filter(Boolean).map(section => {
+    const [title, ...content] = section.split('\n')
+    return { title, content: content.join('\n') }
+  })
+
+  return (
+    <main className="min-h-screen bg-background">
+      <Nav />
+      
+      <section className="pt-32 pb-20 bg-background-secondary/30">
+        <div className="container-max px-4 sm:px-6 lg:px-8">
+          <Link href="/cases" className="inline-flex items-center text-accent-red hover:text-accent-cta transition-colors duration-300 mb-6">
+            <ArrowLeft className="w-5 h-5 mr-2" />
+            Back to Case Studies
+          </Link>
+          
+          <motion.div
+            variants={fadeInUpVariants}
+            initial="hidden"
+            animate="visible"
+            className="max-w-4xl mx-auto text-center"
+          >
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+              {caseStudy.title}
+            </h1>
+            <p className="text-xl text-text-secondary mb-8">
+              {caseStudy.excerpt}
+            </p>
+            
+            {/* Meta */}
+            <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-text-secondary">
+              <div className="flex items-center space-x-2">
+                <User className="w-4 h-4" />
+                <span>{caseStudy.author.name}</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Calendar className="w-4 h-4" />
+                <span>{new Date(caseStudy.publishedAt).toLocaleDateString()}</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-background">
+        <div className="container-max px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            {/* Tags */}
+            {caseStudy.tags && (
+              <motion.div
+                variants={fadeInUpDelayedVariants(0.1)}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="flex flex-wrap gap-2 mb-8"
+              >
+                {caseStudy.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-3 py-1 bg-accent-red/20 text-accent-red rounded-full text-sm font-medium"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </motion.div>
+            )}
+
+            {/* Metrics */}
+            {caseStudy.metrics && (
+              <motion.div
+                variants={fadeInUpDelayedVariants(0.2)}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12"
+              >
+                {caseStudy.metrics.map((metric) => (
+                  <div key={metric.label} className="glow-card text-center p-6">
+                    <h3 className="text-lg font-semibold mb-2">{metric.label}</h3>
+                    <div className="text-3xl font-bold text-accent-emerald mb-2">
+                      {metric.value}
+                    </div>
+                    {metric.description && (
+                      <p className="text-sm text-text-secondary">
+                        {metric.description}
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </motion.div>
+            )}
+
+            {/* Content */}
+            {sections.map((section, index) => (
+              <motion.div
+                key={section.title}
+                variants={fadeInUpDelayedVariants(0.2 + index * 0.1)}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+              >
+                <ContentSection
+                  title={section.title}
+                  content={section.content}
+                />
+              </motion.div>
+            ))}
+
+            {/* Testimonial */}
+            {caseStudy.testimonial && (
+              <motion.div
+                variants={fadeInUpDelayedVariants(0.3)}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="my-12"
+              >
+                <CaseStudyTestimonial
+                  quote={caseStudy.testimonial.quote}
+                  author={{ name: caseStudy.testimonial.author }}
+                  role={caseStudy.testimonial.role}
+                  company={caseStudy.testimonial.company}
+                />
+              </motion.div>
+            )}
+
+            {/* Images */}
+            {caseStudy.images && caseStudy.images.length > 0 && (
+              <motion.div
+                variants={fadeInUpDelayedVariants(0.4)}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="my-12"
+              >
+                <CaseStudyImageGallery images={caseStudy.images} />
+              </motion.div>
+            )}
+          </div>
+        </div>
+      </section>
+      
+      <Footer />
+    </main>
+  )
+}

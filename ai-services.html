@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>AI Services</title>
+    <style>
+        /* Override body background */
+        html, body {
+            background-color: #FFFFFF !important;
+            color: #333333 !important;
+        }
+
+        /* Override any dark theme inheritance */
+        section, .contact, .ai-services {
+            background-color: #FFFFFF !important;
+        }
+
+        body {
+            background-color: #FFFFFF;
+            color: #333333;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .heading {
+            color: #0A1F44;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #1976D2, #2196F3);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            font-size: 1.6rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #FFD580;
+        }
+
+        .service-card {
+            background-color: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-card i {
+            font-size: 4rem;
+            color: #1976D2;
+            margin-bottom: 1rem;
+        }
+
+        .service-description {
+            color: #333333;
+        }
+
+        .contact-cta h3 {
+            color: #333333;
+        }
+
+        .hire-me-btn {
+            background: linear-gradient(45deg, #1976D2, #2196F3);
+            color: white;
+            border: none;
+            padding: 1.5rem 3rem;
+            border-radius: 5rem;
+            font-size: 1.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 5px 15px rgba(183, 75, 75, 0.3);
+            margin-top: 2rem;
+        }
+
+        .hire-me-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(183, 75, 75, 0.4);
+            background: linear-gradient(45deg, #ff6b6b, #b74b4b);
+        }
+
+        .contact-cta {
+            background: #FFFFFF;
+            padding: 4rem 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            margin: 4rem auto;
+            max-width: 800px;
+            border: 1px solid #E0E0E0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-cta h3 {
+            color: #333333;
+            font-size: 2.4rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Fix header contrast for AI services page */
+        header nav a {
+            color: #b74b4b;
+        }
+
+        header nav a:hover,
+        header nav a.active {
+            color: #ff6b6b;
+            border-bottom: 3px solid #ff6b6b;
+        }
+
+        .service-card {
+            cursor: pointer;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(183, 75, 75, 0.2);
+        }
+
+        /* Updated contact section styling */
+        .contact {
+            background-color: #FFFFFF;
+            min-height: auto;
+            padding: 5rem 9% 2rem;
+            color: #333333;
+        }
+
+        .contact form {
+            max-width: 70rem;
+            margin: 1rem auto;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: #FFFFFF;
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid #E0E0E0;
+        }
+
+        .contact form .input-box input,
+        .contact form textarea {
+            width: 100%;
+            padding: 1.5rem;
+            font-size: 1.6rem;
+            color: #333333;
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .contact form .input-box input:focus,
+        .contact form textarea:focus {
+            border-color: #1976D2;
+            box-shadow: 0 0 10px rgba(25, 118, 210, 0.1);
+            background: #FFFFFF;
+        }
+
+        .contact form button.btn {
+            background: linear-gradient(45deg, #1976D2, #2196F3);
+            color: white;
+            border: none;
+            padding: 1.5rem 3rem;
+            border-radius: 5rem;
+            font-size: 1.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 5px 15px rgba(25, 118, 210, 0.3);
+            margin-top: 2rem;
+        }
+
+        .contact form button.btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(25, 118, 210, 0.4);
+            background: linear-gradient(45deg, #2196F3, #1976D2);
+        }
+
+        .contact .heading {
+            color: #0A1F44;
+            text-align: center;
+            font-size: 4.5rem;
+            margin-bottom: 5rem;
+        }
+
+        .contact .heading span {
+            color: #1976D2;
+        }
+
+        .contact form .input-box {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .contact form .input-box input {
+            width: calc(50% - 1rem);
+        }
+
+        @media (max-width: 768px) {
+            .contact form .input-box input {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+        }
+
+        ::placeholder {
+            color: #666666;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="index.html" class="logo">Tushar</a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="ai-services.html" class="active">AI Services</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section class="ai-services">
+        <h2 class="heading">AI <span>Services</span></h2>
+        <div class="section-intro">
+            <p>I offer professional AI services to help businesses innovate and secure their operations. From developing intelligent agents to integrating AI into your workflows, I provide tailored solutions to meet your needs.</p>
+        </div>
+
+        <div class="services-container">
+            <div class="service-card">
+                <i class="fas fa-robot"></i>
+                <h3>AI Agents</h3>
+                <p class="service-description">Custom AI agents designed to automate tasks and enhance decision-making processes.</p>
+            </div>
+
+            <div class="service-card">
+                <i class="fas fa-cogs"></i>
+                <h3>Automation Scripts</h3>
+                <p class="service-description">Efficient scripts to automate repetitive tasks, saving time and resources.</p>
+            </div>
+
+            <div class="service-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Business AI Integration</h3>
+                <p class="service-description">Seamlessly integrate AI into your business operations for improved efficiency and insights.</p>
+            </div>
+
+            <div class="service-card">
+                <i class="fas fa-comments"></i>
+                <h3>AI Chatbots</h3>
+                <p class="service-description">Develop intelligent chatbots to enhance customer engagement and support.</p>
+            </div>
+
+            <div class="service-card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>AI Cybersecurity Consulting</h3>
+                <p class="service-description">Leverage AI to strengthen your cybersecurity posture and protect digital assets.</p>
+            </div>
+        </div>
+
+        <div class="contact-cta">
+            <h3>Ready to transform your business with AI?</h3>
+            <a href="#contact" class="hire-me-btn">Hire Me</a>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h2 class="heading">Contact <span>Me</span></h2>
+        <form action="https://formspree.io/f/your-form-id" method="POST" id="contact-form">
+            <div class="input-box">
+                <input type="text" name="name" placeholder="[Enter Your Name]" required>
+                <input type="email" name="email" placeholder="[Your Email Address]" required>
+            </div>
+            <div class="input-box">
+                <input type="text" name="subject" placeholder="[Message Subject]" required>
+            </div>
+            <textarea name="message" cols="30" rows="10" placeholder="[Type Your Message Here...]" required></textarea>
+            <button type="submit" class="btn">
+                <i class="fas fa-terminal"></i> Send Message
+            </button>
+        </form>
+    </section>
+</body>
+
+</html>

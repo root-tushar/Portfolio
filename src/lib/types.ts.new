@@ -1,0 +1,187 @@
+export interface Project {
+  id: string
+  title: string
+  description: string
+  technologies: string[]
+  image: string
+  githubUrl?: string
+  liveUrl?: string
+  category: 'cybersecurity' | 'ai' | 'web'
+}
+
+export interface Service {
+  id: string
+  title: string
+  description: string
+  icon: string
+  features: string[]
+  category: 'ai' | 'cybersecurity'
+}
+
+export interface Testimonial {
+  id: string
+  name: string
+  role: string
+  company: string
+  content: string
+  avatar?: string
+  rating: number
+}
+
+export interface CaseStudy {
+  id: string
+  title: string
+  excerpt: string
+  content: string
+  publishedAt: string
+  author: {
+    name: string
+    avatar?: string
+  }
+  tags: string[]
+  metrics?: {
+    label: string
+    value: string
+    description?: string
+  }[]
+  testimonial?: {
+    quote: string
+    author: string
+    role?: string
+    company?: string
+  }
+  images?: {
+    url: string
+    alt: string
+    caption?: string
+  }[]
+}
+
+export interface BlogPost {
+  id: string
+  title: string
+  excerpt: string
+  content: string
+  publishedAt: string
+  author: {
+    name: string
+    image?: string
+  }
+  tags: string[]
+  image?: string
+  readingTime: string
+}
+
+export interface AnimationConfig {
+  duration?: number
+  delay?: number
+  ease?: string
+  type?: 'spring' | 'tween' | 'inertia'
+  stiffness?: number
+  damping?: number
+  mass?: number
+}
+
+export interface InteractiveElementProps {
+  glowOnHover?: boolean
+  soundOnHover?: boolean
+  animationConfig?: AnimationConfig
+  customGlowColor?: string
+  glowIntensity?: number
+}
+
+export interface MousePosition {
+  x: number
+  y: number
+}
+
+export interface GlowingElementConfig {
+  baseColor: string
+  glowColor: string
+  intensity: number
+  duration: number
+  mouseDistance: number
+  pulseSpeed?: number
+  maxIntensity?: number
+  minIntensity?: number
+}
+
+export interface MatrixRainConfig {
+  characters: string
+  speed: number
+  density: number
+  color: string
+  opacity: number
+  fontSize?: string
+  fontFamily?: string
+  glowEffect?: boolean
+  randomizeSpeed?: boolean
+}
+
+export interface ContactForm {
+  name: string
+  email: string
+  subject: string
+  message: string
+}
+
+export interface LeadMagnetForm {
+  email: string
+  name?: string
+}
+
+export interface PricingTier {
+  id: string
+  name: string
+  price: string
+  description: string
+  features: string[]
+  recommended?: boolean
+  cta: string
+}
+
+export interface GameState {
+  isPlaying: boolean
+  score: number
+  level: number
+  hints: number
+  timeElapsed: number
+  difficulty: 'easy' | 'medium' | 'hard'
+  powerUps: string[]
+  achievements: string[]
+  lastCheckpoint?: {
+    level: number
+    score: number
+    time: number
+  }
+}
+
+export interface GameConfig {
+  soundEnabled: boolean
+  particleEffects: boolean
+  difficulty: 'easy' | 'medium' | 'hard'
+  theme: 'matrix' | 'cyber' | 'classic'
+  controlScheme: 'arrows' | 'wasd' | 'custom'
+  customControls?: Record<string, string>
+}
+
+export interface Terminal {
+  command: string
+  output: string
+  timestamp: number
+  status: 'success' | 'error' | 'info'
+  id: string
+}
+
+export interface KonamiCode {
+  sequence: string[]
+  currentIndex: number
+  timeoutId?: number
+  lastKeyTime?: number
+  unlocked: boolean
+  reward?: {
+    type: 'theme' | 'feature' | 'easter-egg'
+    id: string
+  }
+  isUnlocked: boolean
+}

@@ -1,0 +1,596 @@
+import { Project, Service, Testimonial, BlogPost, PricingTier, CaseStudy } from './types'
+
+// Projects
+export const projects: Project[] = [
+  {
+    id: '1',
+    title: 'Network Security Monitor',
+    description: 'A sophisticated network monitoring tool that detects and logs suspicious traffic patterns using Python and Wireshark.',
+    technologies: ['Python', 'Wireshark', 'Packet Analysis', 'Network Security'],
+    image: '/api/placeholder/400/300',
+    githubUrl: '#',
+    liveUrl: '#',
+    category: 'cybersecurity'
+  },
+  {
+    id: '2',
+    title: 'Web Security Scanner',
+    description: 'Advanced web application vulnerability scanner focusing on OWASP Top 10 vulnerabilities.',
+    technologies: ['Python', 'OWASP', 'SQL Injection', 'XSS Detection'],
+    image: '/api/placeholder/400/300',
+    githubUrl: '#',
+    liveUrl: '#',
+    category: 'cybersecurity'
+  },
+  {
+    id: '3',
+    title: 'Linux Hardening Script',
+    description: 'Automated script for Linux system hardening and security configuration using CIS benchmarks.',
+    technologies: ['Bash', 'Linux Security', 'Automation', 'CIS Benchmarks'],
+    image: '/api/placeholder/400/300',
+    githubUrl: '#',
+    liveUrl: '#',
+    category: 'cybersecurity'
+  },
+  {
+    id: '4',
+    title: 'Password Security Tool',
+    description: 'Advanced tool for analyzing password strength and detecting common security vulnerabilities.',
+    technologies: ['Python', 'Cryptography', 'Hash Analysis', 'Security Testing'],
+    image: '/api/placeholder/400/300',
+    githubUrl: '#',
+    liveUrl: '#',
+    category: 'cybersecurity'
+  }
+]
+
+// Services migrated from ai-services.html and index.html
+export const services: Service[] = [
+  // AI Services
+  {
+    id: 'ai-security',
+    title: 'AI-Powered Security',
+    description: 'Enhance your security with AI and machine learning',
+    icon: 'shield-ai',
+    features: [
+      'Threat Detection',
+      'Automated Response',
+      'Pattern Recognition',
+      'Predictive Analysis'
+    ],
+    category: 'ai'
+  },
+  {
+    id: 'ai-agent',
+    title: 'AI Agent Development',
+    description: 'Custom AI agents for security automation',
+    icon: 'robot',
+    features: [
+      'Custom Models',
+      'Integration Support',
+      'Performance Tuning',
+      'Ongoing Training'
+    ],
+    category: 'ai'
+  },
+  // Cybersecurity Services
+  {
+    id: 'pentesting',
+    title: 'Penetration Testing',
+    description: 'Comprehensive security assessment and testing',
+    icon: 'target',
+    features: [
+      'Web App Testing',
+      'Network Testing',
+      'Social Engineering',
+      'Detailed Reports'
+    ],
+    category: 'cybersecurity'
+  },
+  {
+    id: 'incident-response',
+    title: 'Incident Response',
+    description: 'Fast and effective security incident handling',
+    icon: 'alert',
+    features: [
+      '24/7 Support',
+      'Rapid Response',
+      'Root Cause Analysis',
+      'Recovery Plans'
+    ],
+    category: 'cybersecurity'
+  }
+]
+
+// Testimonials
+export const testimonials: Testimonial[] = [
+  {
+    id: '1',
+    name: 'David Chen',
+    role: 'CTO',
+    company: 'TechCorp',
+    content: 'Incredible expertise in both AI and security. The solutions delivered exceeded our expectations.',
+    rating: 5
+  },
+  {
+    id: '2',
+    name: 'Sarah Johnson',
+    role: 'CISO',
+    company: 'GlobalBank',
+    content: 'Working with Tushar was a game-changer. His expertise in both cybersecurity and AI is rare and valuable.',
+    rating: 5
+  },
+  {
+    id: '3',
+    name: 'Dr. Emily Watson',
+    role: 'Head of IT',
+    company: 'MedTech Solutions',
+    content: 'Tushar\'s approach to security is both thorough and creative. He helped us implement robust protections without disrupting operations.',
+    rating: 5
+  }
+]
+
+// Blog Posts
+export const blogPosts: BlogPost[] = [
+  {
+    id: '1',
+    title: 'The Future of AI in Cybersecurity',
+    excerpt: 'Exploring how artificial intelligence is revolutionizing threat detection and response.',
+    content: 'Full blog content here...',
+    publishedAt: '2025-08-15',
+    author: {
+      name: 'Tushar',
+      image: '/images/tushar.jpg'
+    },
+    tags: ['AI', 'Cybersecurity', 'Future Tech'],
+    image: '/blog/ai-security.jpg'
+  },
+  {
+    id: '2',
+    title: 'Building a Security Testing Lab',
+    excerpt: 'A comprehensive guide to setting up your own security testing environment.',
+    content: 'Full blog content here...',
+    publishedAt: '2025-08-10',
+    author: {
+      name: 'Tushar',
+      image: '/images/tushar.jpg'
+    },
+    tags: ['Security', 'Tutorial', 'Lab Setup'],
+    image: '/blog/security-lab.jpg'
+  }
+]
+
+// Pricing Tiers
+export const pricingTiers: PricingTier[] = [
+  {
+    id: 'starter',
+    name: 'Starter',
+    price: '$2,500',
+    description: 'Perfect for small businesses starting their security journey',
+    features: [
+      'Security Assessment',
+      'Basic AI Integration',
+      '24/7 Monitoring Setup',
+      'Monthly Reports',
+      'Email Support'
+    ]
+  },
+  {
+    id: 'pro',
+    name: 'Pro',
+    price: '$7,500',
+    description: 'Comprehensive security and AI solutions for growing companies',
+    features: [
+      'Everything in Starter',
+      'Penetration Testing',
+      'AI Agent Development',
+      'Incident Response',
+      'Weekly Reports',
+      'Priority Support'
+    ],
+    recommended: true
+  },
+  {
+    id: 'enterprise',
+    name: 'Enterprise',
+    price: 'Custom',
+    description: 'Tailored solutions for large organizations with complex needs',
+    features: [
+      'Everything in Pro',
+      'Custom AI Development',
+      'Security Architecture',
+      'Team Training',
+      'Dedicated Support',
+      'Custom Integrations'
+    ]
+  }
+]
+
+// Platform Statistics
+export const platformStats = {
+  tryHackMe: {
+    rank: 'Top 1%',
+    rooms: '300+',
+    logo: 'https://assets.tryhackme.com/img/favicon.png'
+  },
+  hackTheBox: {
+    rank: 'Pro Hacker',
+    machines: '15+',
+    logo: 'https://app.hackthebox.com/images/HTB-favicon.png'
+  },
+  personalLab: {
+    hours: '50+',
+    description: 'Hands-on Practice'
+  }
+}
+
+export const securityProjects = [
+  {
+    id: '2',
+    title: 'Web Vulnerability Scanner',
+    description: 'Advanced web application vulnerability scanner focusing on OWASP Top 10 vulnerabilities. Includes automated testing and detailed reporting.',
+    technologies: ['Python', 'OWASP', 'SQL Injection', 'XSS Detection'],
+    image: '/api/placeholder/400/300',
+    githubUrl: '#',
+    liveUrl: '#',
+    category: 'cybersecurity'
+  },
+  {
+    id: '3',
+    title: 'Linux Hardening Script',
+    description: 'Comprehensive automated script for Linux system hardening and security configuration. Implements CIS benchmarks and security best practices.',
+    technologies: ['Bash', 'Linux Security', 'Automation', 'CIS Benchmarks'],
+    image: '/api/placeholder/400/300',
+    githubUrl: '#',
+    liveUrl: '#',
+    category: 'cybersecurity'
+  },
+  {
+    id: '4',
+    title: 'Password Security Tool',
+    description: 'Advanced tool for analyzing password strength and detecting common security vulnerabilities. Includes hash analysis and breach checking.',
+    technologies: ['Python', 'Cryptography', 'Hash Analysis', 'Security Testing'],
+    image: '/api/placeholder/400/300',
+    githubUrl: '#',
+    liveUrl: '#',
+    category: 'cybersecurity'
+  }
+]
+
+// Services migrated from ai-services.html and index.html
+export const services: Service[] = [
+  // AI Services
+  {
+    id: 'ai-1',
+    title: 'AI Agents',
+    description: 'Custom AI agents designed to automate tasks and enhance decision-making processes. Built with security-first principles.',
+    icon: 'robot',
+    features: ['Task Automation', 'Decision Support', 'Security Integration', 'Custom Training'],
+    category: 'ai'
+  },
+  {
+    id: 'ai-2',
+    title: 'Automation Scripts',
+    description: 'Efficient scripts to automate repetitive tasks, saving time and resources while maintaining security standards.',
+    icon: 'cogs',
+    features: ['Process Automation', 'Security Compliance', 'Error Handling', 'Monitoring'],
+    category: 'ai'
+  },
+  {
+    id: 'ai-3',
+    title: 'Business AI Integration',
+    description: 'Seamlessly integrate AI into your business operations for improved efficiency and insights.',
+    icon: 'chart-line',
+    features: ['Workflow Optimization', 'Data Analysis', 'Performance Metrics', 'ROI Tracking'],
+    category: 'ai'
+  },
+  {
+    id: 'ai-4',
+    title: 'AI Chatbots',
+    description: 'Develop intelligent chatbots to enhance customer engagement and support with security awareness.',
+    icon: 'comments',
+    features: ['Natural Language Processing', 'Security Training', '24/7 Support', 'Analytics'],
+    category: 'ai'
+  },
+  {
+    id: 'ai-5',
+    title: 'AI Cybersecurity Consulting',
+    description: 'Leverage AI to strengthen your cybersecurity posture and protect digital assets.',
+    icon: 'shield-alt',
+    features: ['Threat Detection', 'Risk Assessment', 'Incident Response', 'Security Training'],
+    category: 'ai'
+  },
+  // Cybersecurity Services
+  {
+    id: 'cyber-1',
+    title: 'Vulnerability Scanning',
+    description: 'Identify and report common security weaknesses in websites and systems with automated scanning.',
+    icon: 'search',
+    features: ['Automated Scanning', 'Detailed Reporting', 'Remediation Guidance', 'Continuous Monitoring'],
+    category: 'cybersecurity'
+  },
+  {
+    id: 'cyber-2',
+    title: 'Ethical Hacking Labs',
+    description: 'Practice real-world attacks in safe environments like TryHackMe & Hack The Box.',
+    icon: 'laptop-code',
+    features: ['Hands-on Training', 'Real-world Scenarios', 'Progress Tracking', 'Skill Development'],
+    category: 'cybersecurity'
+  },
+  {
+    id: 'cyber-3',
+    title: 'Bug Hunting',
+    description: 'Find and report basic security flaws like XSS and SQLi with systematic approach.',
+    icon: 'bug',
+    features: ['Vulnerability Research', 'Exploit Development', 'Responsible Disclosure', 'Bug Bounty Programs'],
+    category: 'cybersecurity'
+  },
+  {
+    id: 'cyber-4',
+    title: 'Kali Linux Expertise',
+    description: 'Use powerful tools for scanning, testing, and securing systems.',
+    icon: 'linux',
+    features: ['Tool Mastery', 'Custom Scripts', 'Security Testing', 'System Hardening'],
+    category: 'cybersecurity'
+  },
+  {
+    id: 'cyber-5',
+    title: 'Wireshark & Packet Analysis',
+    description: 'Analyze traffic to detect suspicious behavior or potential leaks.',
+    icon: 'network-wired',
+    features: ['Traffic Analysis', 'Threat Detection', 'Network Forensics', 'Performance Monitoring'],
+    category: 'cybersecurity'
+  }
+]
+
+// Testimonials (placeholder for now)
+export const testimonials: Testimonial[] = [
+  {
+    id: '1',
+    name: 'Sarah Chen',
+    role: 'CTO',
+    company: 'TechStart Inc.',
+    content: 'Tushar transformed our security posture in just 30 days. His AI-powered solutions are both innovative and practical.',
+    rating: 5
+  },
+  {
+    id: '2',
+    name: 'Marcus Rodriguez',
+    role: 'Security Director',
+    company: 'GlobalBank',
+    content: 'Working with Tushar was a game-changer. His expertise in both cybersecurity and AI is rare and valuable.',
+    rating: 5
+  },
+  {
+    id: '3',
+    name: 'Dr. Emily Watson',
+    role: 'Head of IT',
+    company: 'MedTech Solutions',
+    content: 'Tushar\'s approach to security is both thorough and creative. He helped us implement robust protections without disrupting operations.',
+    rating: 5
+  }
+]
+
+// Case Studies
+export const caseStudies: CaseStudy[] = [
+  {
+    id: 'financial-services-ai-security',
+    title: 'Fortifying Financial Services: AI-Powered Security Transformation',
+    excerpt: 'How we helped a regional bank implement AI-driven threat detection and reduce security incidents by 87% in 90 days.',
+    content: `# Challenge
+A regional bank with over $5B in assets was facing increasing cybersecurity threats and struggling with their traditional security infrastructure. They needed a modern solution that could handle sophisticated attacks while maintaining regulatory compliance.
+
+## Key Challenges
+- Rising number of security incidents
+- Outdated threat detection systems
+- High false positive rates
+- Resource-intensive manual security reviews
+- Strict regulatory requirements
+
+# Solution
+We implemented a comprehensive AI-powered security transformation:
+
+1. **AI-Driven Threat Detection**
+   - Deployed machine learning models for anomaly detection
+   - Implemented behavioral analysis systems
+   - Created custom AI models trained on financial sector threats
+
+2. **Automated Response System**
+   - Set up automated incident response workflows
+   - Integrated SOAR (Security Orchestration and Automated Response)
+   - Developed custom playbooks for common scenarios
+
+3. **Compliance Integration**
+   - Built automated compliance reporting
+   - Implemented continuous monitoring
+   - Created audit-ready documentation systems
+
+# Implementation Process
+1. Initial Assessment (2 weeks)
+2. System Design (3 weeks)
+3. Pilot Implementation (4 weeks)
+4. Full Deployment (6 weeks)
+5. Training and Optimization (3 weeks)
+
+# Results
+The transformation yielded significant improvements across all key metrics:`,
+    publishedAt: '2024-01-15',
+    author: {
+      name: 'Tushar',
+      image: '/images/tushar.jpg'
+    },
+    tags: ['Cybersecurity', 'AI', 'Financial Services', 'Threat Detection', 'SOAR', 'Compliance'],
+    metrics: {
+      impact: '87% reduction in security incidents',
+      timeframe: '90 days',
+      cost: '40% lower than traditional solutions',
+      additionalMetrics: {
+        falsePositives: '92% reduction in false positives',
+        responseTime: 'Average response time reduced from 2 hours to 3 minutes',
+        compliance: '100% audit compliance achieved',
+        coverage: '99.9% system coverage'
+      }
+    },
+    testimonial: {
+      quote: "The AI-powered security transformation has revolutionized our threat detection capabilities. We're now able to identify and respond to threats in minutes instead of hours.",
+      author: "CISO, Regional Bank",
+      position: "Chief Information Security Officer"
+    }
+  },
+  {
+    id: 'manufacturing-zero-trust',
+    title: 'Manufacturing Security Revolution: Zero Trust Implementation',
+    excerpt: 'Complete security overhaul for a manufacturing company, implementing zero-trust architecture and AI monitoring.',
+    content: `# Challenge
+A leading manufacturing company with multiple facilities worldwide needed to modernize their security architecture to protect intellectual property and operational technology (OT) systems.
+
+## Key Challenges
+- Legacy systems with limited security
+- Complex supply chain interactions
+- Mixed IT/OT environment
+- Multiple international locations
+- Increasing cyber threats to manufacturing
+
+# Solution
+We implemented a comprehensive zero-trust security architecture:
+
+1. **Identity and Access Management**
+   - Implemented strong identity verification
+   - Deployed MFA across all systems
+   - Created granular access controls
+
+2. **Network Segmentation**
+   - Microsegmented IT and OT networks
+   - Implemented software-defined perimeter
+   - Created secure zones for critical assets
+
+3. **AI-Powered Monitoring**
+   - Deployed AI for behavioral analysis
+   - Implemented predictive threat detection
+   - Created custom monitoring for OT systems
+
+# Implementation Process
+1. Security Assessment (3 weeks)
+2. Architecture Design (4 weeks)
+3. Pilot Deployment (6 weeks)
+4. Global Rollout (12 weeks)
+5. Training and Optimization (4 weeks)
+
+# Results
+The zero-trust implementation delivered substantial security improvements:`,
+    publishedAt: '2024-02-20',
+    author: {
+      name: 'Tushar',
+      image: '/images/tushar.jpg'
+    },
+    tags: ['Zero Trust', 'Manufacturing', 'AI Monitoring', 'Network Security', 'OT Security', 'Access Control'],
+    metrics: {
+      impact: '100% threat detection rate',
+      timeframe: '120 days',
+      cost: '60% operational cost reduction',
+      additionalMetrics: {
+        breaches: 'Zero security breaches since implementation',
+        productivity: '35% improvement in system access speed',
+        compliance: 'ISO 27001 certification achieved',
+        coverage: '100% of critical systems protected'
+      }
+    },
+    testimonial: {
+      quote: "The zero-trust architecture has transformed our security posture while improving operational efficiency. It's been a game-changer for our global operations.",
+      author: "VP of Technology",
+      position: "Vice President, Global Manufacturing Company"
+    }
+  }
+]
+
+// Blog Posts
+export const blogPosts: BlogPost[] = [
+  {
+    id: '1',
+    title: 'The Future of AI in Cybersecurity: What You Need to Know',
+    excerpt: 'Exploring how artificial intelligence is revolutionizing threat detection and response in modern cybersecurity.',
+    content: 'Full blog content would go here...',
+    publishedAt: '2024-01-10',
+    author: {
+      name: 'Tushar',
+      image: '/images/tushar.jpg'
+    },
+    tags: ['AI', 'Cybersecurity', 'Future Tech', 'Threat Detection'],
+    readTime: 8
+  },
+  {
+    id: '2',
+    title: 'Building a Home Lab for Cybersecurity Practice',
+    excerpt: 'A comprehensive guide to setting up your own cybersecurity lab for hands-on learning and skill development.',
+    content: 'Full blog content would go here...',
+    publishedAt: '2024-01-25',
+    author: {
+      name: 'Tushar',
+      image: '/images/tushar.jpg'
+    },
+    tags: ['Home Lab', 'Cybersecurity', 'Learning', 'Practice'],
+    readTime: 12
+  },
+  {
+    id: '3',
+    title: 'OWASP Top 10: Modern Approaches to Web Security',
+    excerpt: 'Updated strategies for addressing the most critical web application security risks in 2024.',
+    content: 'Full blog content would go here...',
+    publishedAt: '2024-02-05',
+    author: {
+      name: 'Tushar',
+      image: '/images/tushar.jpg'
+    },
+    tags: ['OWASP', 'Web Security', 'Vulnerabilities', 'Best Practices'],
+    readTime: 10
+  }
+]
+
+// Pricing Tiers
+export const pricingTiers: PricingTier[] = [
+  {
+    id: 'starter',
+    name: 'Starter',
+    price: '$2,500',
+    description: 'Perfect for small businesses starting their security journey',
+    features: [
+      'Security Assessment',
+      'Basic AI Integration',
+      '24/7 Monitoring Setup',
+      'Monthly Reports',
+      'Email Support'
+    ],
+    cta: 'Get Started'
+  },
+  {
+    id: 'pro',
+    name: 'Pro',
+    price: '$7,500',
+    description: 'Comprehensive security and AI solutions for growing companies',
+    features: [
+      'Everything in Starter',
+      'Penetration Testing',
+      'AI Agent Development',
+      'Incident Response',
+      'Weekly Reports',
+      'Priority Support'
+    ],
+    recommended: true,
+    cta: 'Choose Pro'
+  },
+  {
+    id: 'enterprise',
+    name: 'Enterprise',
+    price: 'Custom',
+    description: 'Tailored solutions for large organizations with complex needs',
+    features: [
+      'Everything in Pro',
+      'Custom AI Development',
+      'Security Architecture',
+      'Team Training',
+      'Dedicated Support',
+      'Custom Integrations'
+    ],
+    cta: 'Contact Sales'
+  }
+]

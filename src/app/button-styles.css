@@ -1,0 +1,27 @@
+/* Button Styles */
+.btn-primary {
+  @apply inline-flex items-center px-6 py-3 rounded-full bg-background border-2 border-accent-cta text-accent-cta font-medium transition-all duration-300 hover:bg-accent-cta hover:text-background hover:shadow-glow-cta;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center px-6 py-3 rounded-full bg-transparent border-2 border-accent-blue text-accent-blue font-medium transition-all duration-300 hover:bg-accent-blue/10 hover:shadow-glow-blue;
+}
+
+.btn-outline {
+  @apply inline-flex items-center px-6 py-3 rounded-full bg-transparent border-2 border-accent-emerald text-accent-emerald font-medium transition-all duration-300 hover:bg-accent-emerald/10 hover:shadow-glow-emerald;
+}
+
+/* Book Consultation Button */
+a[href="/contact"].btn-primary {
+  @apply border-accent-cta text-accent-cta hover:bg-accent-cta hover:text-background hover:shadow-glow-cta;
+}
+
+/* Explore Services Button */
+a[href="/services"].btn-secondary {
+  @apply border-accent-blue text-accent-blue hover:bg-accent-blue/10 hover:shadow-glow-blue;
+}
+
+/* Book Free 30-min Consult Button */
+a[href="/contact"].btn-primary:has(span:contains("Book Free 30-min Consult")) {
+  @apply border-accent-cta text-accent-cta hover:bg-accent-cta hover:text-background hover:shadow-glow-cta;
+}

@@ -1,0 +1,228 @@
+import { Project, Service, Testimonial, BlogPost, PricingTier } from './types'
+import { caseStudies } from './case-studies'
+
+export { caseStudies }
+
+// Projects
+export const projects: Project[] = [
+  {
+    id: '1',
+    title: 'Network Security Monitor',
+    description: 'A sophisticated network monitoring tool that detects and logs suspicious traffic patterns using Python and Wireshark.',
+    technologies: ['Python', 'Wireshark', 'Packet Analysis', 'Network Security'],
+    image: '/api/placeholder/400/300',
+    githubUrl: '#',
+    liveUrl: '#',
+    category: 'cybersecurity'
+  },
+  {
+    id: '2',
+    title: 'Web Security Scanner',
+    description: 'Advanced web application vulnerability scanner focusing on OWASP Top 10 vulnerabilities.',
+    technologies: ['Python', 'OWASP', 'SQL Injection', 'XSS Detection'],
+    image: '/api/placeholder/400/300',
+    githubUrl: '#',
+    liveUrl: '#',
+    category: 'cybersecurity'
+  },
+  {
+    id: '3',
+    title: 'Linux Hardening Script',
+    description: 'Automated script for Linux system hardening and security configuration using CIS benchmarks.',
+    technologies: ['Bash', 'Linux Security', 'Automation', 'CIS Benchmarks'],
+    image: '/api/placeholder/400/300',
+    githubUrl: '#',
+    liveUrl: '#',
+    category: 'cybersecurity'
+  },
+  {
+    id: '4',
+    title: 'Password Security Tool',
+    description: 'Advanced tool for analyzing password strength and detecting common security vulnerabilities.',
+    technologies: ['Python', 'Cryptography', 'Hash Analysis', 'Security Testing'],
+    image: '/api/placeholder/400/300',
+    githubUrl: '#',
+    liveUrl: '#',
+    category: 'cybersecurity'
+  }
+]
+
+// Services
+export const services: Service[] = [
+  // AI Services
+  {
+    id: 'ai-security',
+    title: 'AI-Powered Security',
+    description: 'Enhance your security with AI and machine learning',
+    icon: 'shield-ai',
+    features: [
+      'Threat Detection',
+      'Automated Response',
+      'Pattern Recognition',
+      'Predictive Analysis'
+    ],
+    category: 'ai'
+  },
+  {
+    id: 'ai-agent',
+    title: 'AI Agent Development',
+    description: 'Custom AI agents for security automation',
+    icon: 'robot',
+    features: [
+      'Custom Models',
+      'Integration Support',
+      'Performance Tuning',
+      'Ongoing Training'
+    ],
+    category: 'ai'
+  },
+  // Cybersecurity Services
+  {
+    id: 'pentesting',
+    title: 'Penetration Testing',
+    description: 'Comprehensive security assessment and testing',
+    icon: 'target',
+    features: [
+      'Web App Testing',
+      'Network Testing',
+      'Social Engineering',
+      'Detailed Reports'
+    ],
+    category: 'cybersecurity'
+  },
+  {
+    id: 'incident-response',
+    title: 'Incident Response',
+    description: 'Fast and effective security incident handling',
+    icon: 'alert',
+    features: [
+      '24/7 Support',
+      'Rapid Response',
+      'Root Cause Analysis',
+      'Recovery Plans'
+    ],
+    category: 'cybersecurity'
+  }
+]
+
+// Testimonials
+export const testimonials: Testimonial[] = [
+  {
+    id: '1',
+    name: 'David Chen',
+    role: 'CTO',
+    company: 'TechCorp',
+    content: 'Incredible expertise in both AI and security. The solutions delivered exceeded our expectations.',
+    rating: 5
+  },
+  {
+    id: '2',
+    name: 'Sarah Johnson',
+    role: 'CISO',
+    company: 'GlobalBank',
+    content: 'Working with Tushar was a game-changer. His expertise in both cybersecurity and AI is rare and valuable.',
+    rating: 5
+  },
+  {
+    id: '3',
+    name: 'Dr. Emily Watson',
+    role: 'Head of IT',
+    company: 'MedTech Solutions',
+    content: 'Tushar\'s approach to security is both thorough and creative. He helped us implement robust protections without disrupting operations.',
+    rating: 5
+  }
+]
+
+// Blog Posts
+export const blogPosts: BlogPost[] = [
+  {
+    id: '1',
+    title: 'The Future of AI in Cybersecurity',
+    excerpt: 'Exploring how artificial intelligence is revolutionizing threat detection and response.',
+    content: 'Full blog content here...',
+    publishedAt: '2025-08-15',
+    author: {
+      name: 'Tushar',
+      image: '/images/tushar.jpg'
+    },
+    tags: ['AI', 'Cybersecurity', 'Future Tech'],
+    image: '/blog/ai-security.jpg'
+  },
+  {
+    id: '2',
+    title: 'Building a Security Testing Lab',
+    excerpt: 'A comprehensive guide to setting up your own security testing environment.',
+    content: 'Full blog content here...',
+    publishedAt: '2025-08-10',
+    author: {
+      name: 'Tushar',
+      image: '/images/tushar.jpg'
+    },
+    tags: ['Security', 'Tutorial', 'Lab Setup'],
+    image: '/blog/security-lab.jpg'
+  }
+]
+
+// Pricing Tiers
+export const pricingTiers: PricingTier[] = [
+  {
+    id: 'starter',
+    name: 'Starter',
+    price: '$2,500',
+    description: 'Perfect for small businesses starting their security journey',
+    features: [
+      'Security Assessment',
+      'Basic AI Integration',
+      '24/7 Monitoring Setup',
+      'Monthly Reports',
+      'Email Support'
+    ]
+  },
+  {
+    id: 'pro',
+    name: 'Pro',
+    price: '$7,500',
+    description: 'Comprehensive security and AI solutions for growing companies',
+    features: [
+      'Everything in Starter',
+      'Penetration Testing',
+      'AI Agent Development',
+      'Incident Response',
+      'Weekly Reports',
+      'Priority Support'
+    ],
+    recommended: true
+  },
+  {
+    id: 'enterprise',
+    name: 'Enterprise',
+    price: 'Custom',
+    description: 'Tailored solutions for large organizations with complex needs',
+    features: [
+      'Everything in Pro',
+      'Custom AI Development',
+      'Security Architecture',
+      'Team Training',
+      'Dedicated Support',
+      'Custom Integrations'
+    ]
+  }
+]
+
+// Platform Statistics
+export const platformStats = {
+  tryHackMe: {
+    rank: 'Top 1%',
+    rooms: '300+',
+    logo: 'https://assets.tryhackme.com/img/favicon.png'
+  },
+  hackTheBox: {
+    rank: 'Pro Hacker',
+    machines: '15+',
+    logo: 'https://app.hackthebox.com/images/HTB-favicon.png'
+  },
+  personalLab: {
+    hours: '50+',
+    description: 'Hands-on Practice'
+  }
+}

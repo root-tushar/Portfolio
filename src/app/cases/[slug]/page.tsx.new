@@ -1,0 +1,107 @@
+'use client'
+
+import { ArrowLeft } from 'lucide-react'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
+import { useEffect } from 'react'
+import { caseStudies } from '@/lib/data'
+import { Footer } from '@/components/Footer'
+import { Nav } from '@/components/Nav'
+import { ContentSection } from '@/components/cases/ContentSection'
+import { CaseStudyMetrics } from '@/components/cases/CaseStudyMetrics'
+import { CaseStudyHero } from '@/components/cases/CaseStudyHero'
+import { CaseStudyTags } from '@/components/cases/CaseStudyTags'
+import { CaseStudyTestimonial } from '@/components/cases/CaseStudyTestimonial'
+import { CaseStudyImageGallery } from '@/components/cases/CaseStudyImageGallery'
+import React from 'react'
+
+interface PageProps {
+  params: {
+    slug: string
+  }
+}
+
+export default function CaseStudyPage({ params }: PageProps) {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
+  if (!params?.slug) {
+    notFound()
+  }
+
+  const caseStudy = caseStudies.find(cs => cs.id === params.slug)
+  
+  if (!caseStudy) {
+    notFound()
+  }
+
+  const sections = caseStudy.content.split('\n# ').filter(Boolean).map(section => {
+    const [title, ...content] = section.split('\n')
+    return { title, content: content.join('\n') }
+  })
+
+  return (
+    <main className="min-h-screen bg-background">
+      <Nav />
+      
+      <section className="pt-32 pb-20 bg-background-secondary/30">
+        <div className="container-max px-4 sm:px-6 lg:px-8">
+          <Link href="/cases" className="inline-flex items-center text-accent-red hover:text-accent-cta transition-colors duration-300 mb-6">
+            <ArrowLeft className="w-5 h-5 mr-2" />
+            Back to Case Studies
+          </Link>
+          
+          <CaseStudyHero
+            title={caseStudy.title}
+            excerpt={caseStudy.excerpt}
+            author={caseStudy.author.name}
+            date={caseStudy.publishedAt}
+            avatar={caseStudy.author.avatar}
+          />
+        </div>
+      </section>
+
+      <section className="py-20 bg-background">
+        <div className="container-max px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            {caseStudy.tags && <CaseStudyTags tags={caseStudy.tags} />}
+            
+            {caseStudy.metrics && (
+              <CaseStudyMetrics
+                metrics={caseStudy.metrics.map(metric => ({
+                  label: metric.label,
+                  value: metric.value,
+                  description: metric.description
+                }))}
+              />
+            )}
+
+            {sections.map((section, index) => (
+              <ContentSection
+                key={section.title}
+                title={section.title}
+                content={section.content}
+              />
+            ))}
+
+            {caseStudy.testimonial && (
+              <CaseStudyTestimonial
+                quote={caseStudy.testimonial.quote}
+                author={caseStudy.testimonial.author}
+                role={caseStudy.testimonial.role}
+                company={caseStudy.testimonial.company}
+              />
+            )}
+
+            {caseStudy.images && caseStudy.images.length > 0 && (
+              <CaseStudyImageGallery images={caseStudy.images} />
+            )}
+          </div>
+        </div>
+      </section>
+      
+      <Footer />
+    </main>
+  )
+}
