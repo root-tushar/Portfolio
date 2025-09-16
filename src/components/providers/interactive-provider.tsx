@@ -55,8 +55,8 @@ export function InteractiveProvider({ children }: InteractiveProviderProps) {
         send: '/sounds/send.mp3',
         notification: '/sounds/notification.mp3',
         on: '/sounds/on.mp3',
-        off: '/sounds/off.mp3',
-        close: '/sounds/close.mp3'
+        off: '/sounds/click.mp3', // Using click.mp3 for off sound
+        close: '/sounds/error.mp3' // Using error.mp3 for close sound
       }
 
       const newAudioCache: Record<string, HTMLAudioElement> = {}
