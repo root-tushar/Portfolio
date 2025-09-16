@@ -34,18 +34,15 @@ export const CaseStudyMetrics: React.FC<CaseStudyMetricsProps> = ({ metrics }) =
         viewport={{ once: true }}
         className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
       >
-        <div className="glow-card p-6 text-center">
-          <h3 className="text-lg font-semibold mb-2">Impact</h3>
-          <p className="text-2xl font-bold text-accent-cta">{metrics.impact}</p>
-        </div>
-        <div className="glow-card p-6 text-center">
-          <h3 className="text-lg font-semibold mb-2">Timeline</h3>
-          <p className="text-2xl font-bold text-accent-cta">{metrics.timeframe}</p>
-        </div>
-        <div className="glow-card p-6 text-center">
-          <h3 className="text-lg font-semibold mb-2">Cost Savings</h3>
-          <p className="text-2xl font-bold text-accent-cta">{metrics.cost}</p>
-        </div>
+        {metrics.map((metric, index) => (
+          <div key={index} className="glow-card p-6 text-center">
+            <h3 className="text-lg font-semibold mb-2">{metric.label}</h3>
+            <p className="text-2xl font-bold text-accent-cta">{metric.value}</p>
+            {metric.description && (
+              <p className="text-sm text-gray-400 mt-2">{metric.description}</p>
+            )}
+          </div>
+        ))}
       </motion.div>
 
       {metrics.additionalMetrics && (

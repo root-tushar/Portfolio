@@ -22,7 +22,7 @@ interface ParticleBGProps {
   interactive?: boolean
 }
 
-export function ParticleBG({ 
+export default function ParticleBG({ 
   density = 100,
   speed = 1,
   colors = ['#2ECC71', '#E53935', '#1976D2'],

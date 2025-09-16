@@ -1,14 +1,13 @@
 'use client'
 
-import type { Metadata } from 'next'
 import { Inter, JetBrains_Mono } from 'next/font/google'
 import '@/styles/globals.css'
 import { Toaster } from 'sonner'
 import { Analytics } from '@vercel/analytics/react'
 import { InteractiveProvider } from '@/components/providers/interactive-provider'
-import { Terminal } from '@/components/ui/Terminal'
-import { Chatbot } from '@/components/ui/Chatbot'
-import { FloatingActions } from '@/components/ui/FloatingActions'
+import Terminal from '@/components/ui/Terminal'
+import Chatbot from '@/components/ui/Chatbot'
+import FloatingActions from '@/components/ui/FloatingActions'
 import { ParticleBG } from '@/components/ParticleBG'
 
 const inter = Inter({ 

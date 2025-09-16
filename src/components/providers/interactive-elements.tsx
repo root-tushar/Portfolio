@@ -3,17 +3,17 @@
 import dynamic from 'next/dynamic'
 import { Suspense } from 'react'
 
-const ParticleBG = dynamic(() => import('../ParticleBG').then(mod => ({ default: mod.ParticleBG })), {
+const ParticleBG = dynamic(() => import('../ParticleBG').then(mod => mod.default), {
   ssr: false,
   loading: () => null
 })
 
-const Terminal = dynamic(() => import('../ui/Terminal').then(mod => ({ default: mod.Terminal })), {
+const Terminal = dynamic(() => import('../ui/Terminal').then(mod => mod.default), {
   ssr: false,
   loading: () => null
 })
 
-const Chatbot = dynamic(() => import('../ui/Chatbot').then(mod => ({ default: mod.Chatbot })), {
+const Chatbot = dynamic(() => import('../ui/Chatbot').then(mod => mod.default), {
   ssr: false,
   loading: () => null
 })

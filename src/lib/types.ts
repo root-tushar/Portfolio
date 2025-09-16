@@ -50,7 +50,11 @@ export interface CaseStudy {
     role?: string
     company?: string
   }
-  images?: string[]
+  images?: {
+    url: string
+    alt: string
+    caption?: string
+  }[]
 }
 
 export interface BlogPost {
