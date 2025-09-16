@@ -8,7 +8,7 @@ import { InteractiveProvider } from '@/components/providers/interactive-provider
 import Terminal from '@/components/ui/Terminal'
 import Chatbot from '@/components/ui/Chatbot'
 import FloatingActions from '@/components/ui/FloatingActions'
-import { ParticleBG } from '@/components/ParticleBG'
+import ParticleBG from '@/components/ParticleBG'
 
 const inter = Inter({ 
   subsets: ['latin'],

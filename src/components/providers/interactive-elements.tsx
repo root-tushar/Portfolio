@@ -18,7 +18,7 @@ const Chatbot = dynamic(() => import('../ui/Chatbot').then(mod => mod.default), 
   loading: () => null
 })
 
-const FloatingActions = dynamic(() => import('../ui/FloatingActions').then(mod => ({ default: mod.FloatingActions })), {
+const FloatingActions = dynamic(() => import('../ui/FloatingActions').then(mod => mod.default), {
   ssr: false,
   loading: () => null
 })

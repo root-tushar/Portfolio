@@ -45,22 +45,7 @@ export const CaseStudyMetrics: React.FC<CaseStudyMetricsProps> = ({ metrics }) =
         ))}
       </motion.div>
 
-      {metrics.additionalMetrics && (
-        <motion.div
-          variants={fadeInUpDelayedVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-12"
-        >
-          {Object.entries(metrics.additionalMetrics).map(([key, value]) => (
-            <div key={key} className="glow-card p-4">
-              <h4 className="text-sm font-semibold mb-1 capitalize">{key.replace(/([A-Z])/g, ' $1').trim()}</h4>
-              <p className="text-lg text-accent-cta">{value}</p>
-            </div>
-          ))}
-        </motion.div>
-      )}
+
     </>
   )
 }
