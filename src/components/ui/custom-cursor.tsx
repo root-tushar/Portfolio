@@ -13,7 +13,7 @@ export function CustomCursor() {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768 || 'ontouchstart' in window)
     }
-    
+
     checkMobile()
     window.addEventListener('resize', checkMobile)
 

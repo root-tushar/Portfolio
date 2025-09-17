@@ -28,6 +28,9 @@ export default function ParticleBG({
   colors = ['#2ECC71', '#E53935', '#1976D2'],
   interactive = true
 }: ParticleBGProps) {
+  // Reduce density on mobile for better performance
+  const isMobile = typeof window !== 'undefined' && (window.innerWidth <= 768 || 'ontouchstart' in window)
+  const adjustedDensity = isMobile ? Math.min(density * 0.3, 30) : density
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const animationIdRef = useRef<number | null>(null)
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
@@ -86,7 +89,7 @@ export default function ParticleBG({
 
     // Particle system
     const particles: Particle[] = []
-    const particleCount = density
+    const particleCount = adjustedDensity
 
     // Initialize particles
     for (let i = 0; i < particleCount; i++) {
@@ -104,8 +107,18 @@ export default function ParticleBG({
       })
     }
 
-    // Animation loop
-    const animate = () => {
+    // Animation loop with frame rate limiting on mobile
+    let lastTime = 0
+    const targetFPS = isMobile ? 30 : 60
+    const frameInterval = 1000 / targetFPS
+
+    const animate = (currentTime: number = 0) => {
+      if (currentTime - lastTime < frameInterval) {
+        animationIdRef.current = requestAnimationFrame(animate)
+        return
+      }
+      lastTime = currentTime
+
       ctx.clearRect(0, 0, canvas.width, canvas.height)
 
       // Update and draw particles
@@ -146,18 +159,20 @@ export default function ParticleBG({
         if (particle.y < 0) particle.y = canvas.height
         if (particle.y > canvas.height) particle.y = 0
 
-        // Draw glow
-        const gradient = ctx.createRadialGradient(
-          particle.x, particle.y, 0,
-          particle.x, particle.y, particle.glowSize
-        )
-        gradient.addColorStop(0, `${particle.color}`)
-        gradient.addColorStop(1, `${particle.color}00`)
-        
-        ctx.beginPath()
-        ctx.arc(particle.x, particle.y, particle.glowSize, 0, Math.PI * 2)
-        ctx.fillStyle = gradient
-        ctx.fill()
+        // Draw glow - skip on mobile for better performance
+        if (!isMobile) {
+          const gradient = ctx.createRadialGradient(
+            particle.x, particle.y, 0,
+            particle.x, particle.y, particle.glowSize
+          )
+          gradient.addColorStop(0, `${particle.color}`)
+          gradient.addColorStop(1, `${particle.color}00`)
+          
+          ctx.beginPath()
+          ctx.arc(particle.x, particle.y, particle.glowSize, 0, Math.PI * 2)
+          ctx.fillStyle = gradient
+          ctx.fill()
+        }
 
         // Draw particle
         ctx.beginPath()
@@ -165,27 +180,23 @@ export default function ParticleBG({
         ctx.fillStyle = particle.color
         ctx.fill()
 
-        // Draw connections
-        particles.forEach((otherParticle) => {
-          const dx = particle.x - otherParticle.x
-          const dy = particle.y - otherParticle.y
-          const distance = Math.sqrt(dx * dx + dy * dy)
+        // Draw connections - skip on mobile for better performance
+        if (!isMobile) {
+          particles.forEach((otherParticle) => {
+            const dx = particle.x - otherParticle.x
+            const dy = particle.y - otherParticle.y
+            const distance = Math.sqrt(dx * dx + dy * dy)
 
-          if (distance < 100) {
-            ctx.beginPath()
-            ctx.moveTo(particle.x, particle.y)
-            ctx.lineTo(otherParticle.x, otherParticle.y)
-            const gradient = ctx.createLinearGradient(
-              particle.x, particle.y,
-              otherParticle.x, otherParticle.y
-            )
-            gradient.addColorStop(0, `${particle.color}${Math.floor(particle.opacity * 255).toString(16).padStart(2, '0')}`)
-            gradient.addColorStop(1, `${otherParticle.color}${Math.floor(otherParticle.opacity * 255).toString(16).padStart(2, '0')}`)
-            ctx.strokeStyle = gradient
-            ctx.lineWidth = 0.5
-            ctx.stroke()
-          }
-        })
+            if (distance < 100) {
+              ctx.beginPath()
+              ctx.moveTo(particle.x, particle.y)
+              ctx.lineTo(otherParticle.x, otherParticle.y)
+              ctx.strokeStyle = `${particle.color}${Math.floor(particle.opacity * 128).toString(16).padStart(2, '0')}`
+              ctx.lineWidth = 0.5
+              ctx.stroke()
+            }
+          })
+        }
       })
 
       animationIdRef.current = requestAnimationFrame(animate)

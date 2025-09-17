@@ -10,7 +10,7 @@ interface TouchRipple {
 }
 
 export function MobileTouchEffects() {
-  const [touchRipples, setTouchRipples] = useState<TouchRipple[]>()
+  const [touchRipples, setTouchRipples] = useState<TouchRipple[]>([])
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -33,12 +33,12 @@ export function MobileTouchEffects() {
           y: touch.clientY
         }
         
-        setTouchRipples(prev => [...(prev || []), newRipple])
+        setTouchRipples(prev => [...prev, newRipple])
         
-        // Remove ripple after animation
+        // Remove ripple after animation - shorter duration
         setTimeout(() => {
-          setTouchRipples(prev => prev?.filter(ripple => ripple.id !== newRipple.id) || [])
-        }, 1000)
+          setTouchRipples(prev => prev.filter(ripple => ripple.id !== newRipple.id))
+        }, 600)
       }
     }
 
@@ -60,57 +60,34 @@ export function MobileTouchEffects() {
   return (
     <div className="fixed inset-0 pointer-events-none z-40">
       <AnimatePresence>
-        {touchRipples?.map((ripple) => (
+        {touchRipples.map((ripple) => (
           <motion.div
             key={ripple.id}
-            className="absolute rounded-full border-2 border-accent-emerald"
+            className="absolute rounded-full border border-accent-emerald/60"
             style={{
-              left: ripple.x - 25,
-              top: ripple.y - 25,
+              left: ripple.x - 15,
+              top: ripple.y - 15,
             }}
             initial={{
               width: 0,
               height: 0,
-              opacity: 0.8,
+              opacity: 0.6,
             }}
             animate={{
-              width: 50,
-              height: 50,
+              width: 30,
+              height: 30,
               opacity: 0,
             }}
             exit={{
               opacity: 0,
             }}
             transition={{
-              duration: 1,
+              duration: 0.6,
               ease: 'easeOut',
             }}
           />
         ))}
       </AnimatePresence>
-      
-      {/* Mobile-specific particle effects */}
-      <div className="absolute inset-0 overflow-hidden">
-        {Array.from({ length: 20 }).map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-accent-emerald rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              opacity: [0.2, 0.8, 0.2],
-              scale: [0.5, 1.5, 0.5],
-            }}
-            transition={{
-              duration: 2 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
-          />
-        ))}
-      </div>
     </div>
   )
 }

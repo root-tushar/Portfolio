@@ -33,24 +33,33 @@ body {
   }
 }
 
-/* Mobile-specific animations */
+/* Mobile-specific animations - optimized for performance */
 @media (max-width: 768px) {
   @keyframes mobile-pulse {
-    0%, 100% { opacity: 0.4; transform: scale(1); }
-    50% { opacity: 0.8; transform: scale(1.05); }
+    0%, 100% { opacity: 0.8; transform: scale3d(1, 1, 1); }
+    50% { opacity: 1; transform: scale3d(1.02, 1.02, 1); }
   }
   
   @keyframes mobile-float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50% { transform: translate3d(0, -5px, 0); }
   }
   
   .mobile-pulse {
-    animation: mobile-pulse 2s ease-in-out infinite;
+    animation: mobile-pulse 3s ease-in-out infinite;
+    will-change: transform, opacity;
   }
   
   .mobile-float {
-    animation: mobile-float 3s ease-in-out infinite;
+    animation: mobile-float 4s ease-in-out infinite;
+    will-change: transform;
+  }
+  
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-pulse, .mobile-float {
+      animation: none;
+    }
   }
 }
 
