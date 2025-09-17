@@ -21,7 +21,7 @@ export function CyberCard({
   return (
     <motion.div
       initial={animate ? { opacity: 0, y: 20 } : false}
-      whileInView={animate ? { opacity: 1, y: 0 } : false}
+      whileInView={animate ? { opacity: 1, y: 0 } : undefined}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
       className={cn(

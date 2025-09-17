@@ -183,7 +183,8 @@ const pricingTiers: PricingTier[] = [
       'Monthly Reports',
       'Email Support'
     ],
-    cta: 'Get Started'
+    cta: 'Get Started',
+    id: ''
   },
   {
     name: 'Pro',
@@ -198,7 +199,8 @@ const pricingTiers: PricingTier[] = [
       'Priority Support'
     ],
     recommended: true,
-    cta: 'Choose Pro'
+    cta: 'Choose Pro',
+    id: ''
   },
   {
     name: 'Enterprise',
@@ -212,7 +214,8 @@ const pricingTiers: PricingTier[] = [
       'Dedicated Support',
       'Custom Integrations'
     ],
-    cta: 'Contact Sales'
+    cta: 'Contact Sales',
+    id: ''
   }
 ];
 

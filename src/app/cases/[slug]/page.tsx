@@ -1,12 +1,11 @@
 
-import { ArrowLeft, Calendar, User } from 'lucide-react'
-export function generateStaticParams() {
-  const { caseStudies } = require('@/lib/data');
-  return caseStudies.map((c: { id: string }) => ({ slug: c.id }));
-}
+'use client'
+
+import React from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { notFound } from 'next/navigation'
+import { ArrowLeft, Calendar, User } from 'lucide-react'
 import { caseStudies } from '@/lib/data'
 import { Footer } from '@/components/Footer'
 import { Nav } from '@/components/Nav'
@@ -15,7 +14,6 @@ import { CaseStudyMetrics } from '@/components/cases/CaseStudyMetrics'
 import { CaseStudyTags } from '@/components/cases/CaseStudyTags'
 import { CaseStudyTestimonial } from '@/components/cases/CaseStudyTestimonial'
 import { CaseStudyImageGallery } from '@/components/cases/CaseStudyImageGallery'
-import React from 'react'
 
 interface PageProps {
   params: {

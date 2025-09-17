@@ -1,3 +1,5 @@
+'use client'
+
 import { Nav } from '@/components/Nav'
 import { Footer } from '@/components/Footer'
 import { motion } from 'framer-motion'
@@ -15,7 +17,8 @@ export default function TermsPage() {
           <Link href="/" className="inline-flex items-center text-accent-red hover:text-accent-cta transition-colors duration-300 mb-6">
             <ArrowLeft className="w-5 h-5 mr-2" />
             Back to Home
-          </Link>
+          </Link
+          >
           
           <motion.div
             initial={{ opacity: 0, y: 20 }}

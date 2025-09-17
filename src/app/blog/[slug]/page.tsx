@@ -1,14 +1,18 @@
+'use client'
+
 import { Nav } from '@/components/Nav'
-import { Footer } from '@/components/Footer'
-import { blogPosts } from '@/lib/data'
-import BlogPostClient from './BlogPostClient'
-import { notFound } from 'next/navigation'
+
+import { blogPosts } from '@/lib/data';
+import { notFound } from 'next/navigation';
+import dynamic from 'next/dynamic';
 
 interface PageProps {
   params: {
-    slug: string
-  }
+    slug: string;
+  };
 }
+
+const BlogPostClient = dynamic(() => import('./BlogPostClient').then(mod => mod.BlogPostClient), { ssr: false });
 
 export default function BlogPostPage({ params }: PageProps) {
   if (!params?.slug) {
@@ -18,17 +22,6 @@ export default function BlogPostPage({ params }: PageProps) {
   if (!post) {
     notFound();
   }
-  return (
-    <main className="min-h-screen bg-background">
-      <Nav />
-      <BlogPostClient post={post} />
-      <Footer />
-    </main>
-  );
+  return <BlogPostClient post={post} />;
 }
 
-export function generateStaticParams() {
-  // Import here to avoid issues with static analysis
-  const { blogPosts } = require('@/lib/data');
-  return blogPosts.map((post: { id: string }) => ({ slug: post.id }));
-}

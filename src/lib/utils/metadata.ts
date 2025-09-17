@@ -1,16 +1,33 @@
 import { Metadata } from 'next'
 
+// Define allowed Open Graph types (matching Next.js Metadata spec)
+type OpenGraphType =
+  | 'website'
+  | 'article'
+  | 'book'
+  | 'profile'
+  | 'music.song'
+  | 'music.album'
+  | 'music.playlist'
+  | 'music.radio_station'
+  | 'video.movie'
+  | 'video.episode'
+  | 'video.tv_show'
+  | 'video.other'
+
+interface MetadataProps {
+  title: string
+  description: string
+  path: string
+  type?: OpenGraphType
+}
+
 export function generatePageMetadata({
   title,
   description,
   path,
-  type = 'website'
-}: {
-  title: string
-  description: string
-  path: string
-  type?: string
-}): Metadata {
+  type = 'website',
+}: MetadataProps): Metadata {
   const baseUrl = 'https://tushar-portfolio.com'
   const url = `${baseUrl}${path}`
 

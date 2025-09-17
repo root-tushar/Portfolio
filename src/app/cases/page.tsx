@@ -1,105 +1,100 @@
-'use client';
-import { Nav } from '@/components/Nav'
-import { Footer } from '@/components/Footer'
-import { caseStudies } from '@/lib/data'
-import { ArrowRight, Calendar, User, Clock } from 'lucide-react'
+'use client'
+
+import React from 'react'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
+import { ArrowLeft, Calendar, User } from 'lucide-react'
+import { caseStudies } from '@/lib/data'
+import { Footer } from '@/components/Footer'
+import { Nav } from '@/components/Nav'
 
 export default function CasesPage() {
+  const fadeInUpVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.6 }
+    }
+  }
+
   return (
-    <div className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background">
       <Nav />
-      <main className="container mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold mb-8 text-text">Case Studies</h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {caseStudies.map((caseStudy) => (
-            <Link 
-              href={`/cases/${caseStudy.id}`}
-              key={caseStudy.id}
-              className="glow-card p-8 hover:scale-105 transition-transform duration-300"
-            >
-              <article>
+      
+      <section className="pt-32 pb-20 bg-background-secondary/30">
+        <div className="container-max px-4 sm:px-6 lg:px-8">
+          <Link href="/" className="inline-flex items-center text-accent-red hover:text-accent-cta transition-colors duration-300 mb-6">
+            <ArrowLeft className="w-5 h-5 mr-2" />
+            Back to Home
+          </Link>
+          
+          <motion.div
+            variants={fadeInUpVariants}
+            initial="hidden"
+            animate="visible"
+            className="max-w-4xl mx-auto text-center"
+          >
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+              Case <span className="text-gradient">Studies</span>
+            </h1>
+            <p className="text-xl text-text-secondary mb-8">
+              Real-world projects and their impact
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-background">
+        <div className="container-max px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {caseStudies.map((caseStudy, index) => (
+              <motion.div
+                key={caseStudy.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="glow-card p-6"
+              >
+                <h3 className="text-xl font-bold mb-3">{caseStudy.title}</h3>
+                <p className="text-text-secondary mb-4">{caseStudy.excerpt}</p>
+                
+                <div className="flex items-center space-x-4 text-sm text-text-secondary mb-4">
+                  <div className="flex items-center space-x-2">
+                    <User className="w-4 h-4" />
+                    <span>{caseStudy.author.name}</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Calendar className="w-4 h-4" />
+                    <span>{new Date(caseStudy.publishedAt).toLocaleDateString()}</span>
+                  </div>
+                </div>
+
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {caseStudy.tags.map((tag) => (
+                  {caseStudy.tags.slice(0, 3).map((tag) => (
                     <span
                       key={tag}
-                      className="px-3 py-1 bg-accent-red/20 text-accent-red rounded-full text-sm font-medium"
+                      className="px-2 py-1 bg-accent-red/20 text-accent-red rounded text-xs"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-                <h2 className="text-2xl font-bold mb-3 text-text">
-                  {caseStudy.title}
-                </h2>
-                <p className="text-text-secondary leading-relaxed mb-6">
-                  {caseStudy.excerpt}
-                </p>
 
-                {/* Metrics */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-                  {caseStudy.metrics && caseStudy.metrics.map((metric, index) => (
-                    <div key={index} className="text-center p-3 bg-background-secondary/30 rounded-lg">
-                      <div className={`text-2xl font-bold ${index === 0 ? 'text-accent-emerald' : index === 1 ? 'text-accent-blue' : 'text-accent-purple'} mb-1`}>
-                        {metric.value}
-                      </div>
-                      <div className="text-sm text-text-secondary">{metric.label}</div>
-                    </div>
-                  ))}
-                  {(!caseStudy.metrics || caseStudy.metrics.length === 0) && (
-                    <>
-                      <div className="text-center p-3 bg-background-secondary/30 rounded-lg">
-                        <div className="text-2xl font-bold text-accent-blue mb-1">N/A</div>
-                        <div className="text-sm text-text-secondary">Timeframe</div>
-                      </div>
-                      <div className="text-center p-3 bg-background-secondary/30 rounded-lg">
-                        <div className="text-2xl font-bold text-accent-cta mb-1">N/A</div>
-                        <div className="text-sm text-text-secondary">Cost Savings</div>
-                      </div>
-                      <div className="text-center p-3 bg-background-secondary/30 rounded-lg">
-                        <div className="text-2xl font-bold text-accent-purple mb-1">N/A</div>
-                        <div className="text-sm text-text-secondary">Results</div>
-                      </div>
-                    </>
-                  )}
-                </div>
-
-                {/* Meta */}
-                <div className="flex items-center justify-between text-sm text-text-secondary mb-6">
-                  <div className="flex items-center space-x-4">
-                    <div className="flex items-center space-x-1">
-                      <User className="w-4 h-4" />
-                      <span>{caseStudy.author?.name || 'Anonymous'}</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <Calendar className="w-4 h-4" />
-                      <span>{caseStudy.publishedAt ? new Date(caseStudy.publishedAt).toLocaleDateString() : 'N/A'}</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="inline-flex items-center text-accent-red hover:text-accent-cta transition-colors duration-300">
-                  Read Full Case Study <ArrowRight className="ml-2 h-4 w-4" />
-                </div>
-              </article>
-            </Link>
-          ))}
+                <Link
+                  href={`/cases/${caseStudy.id}`}
+                  className="btn-primary inline-block"
+                >
+                  Read Case Study
+                </Link>
+              </motion.div>
+            ))}
+          </div>
         </div>
-
-        {/* CTA */}
-        <div className="text-center mt-16 animate-fade-in">
-          <h3 className="text-3xl font-bold mb-4">
-            Ready to See Similar Results?
-          </h3>
-          <p className="text-xl text-text-secondary mb-8 max-w-2xl mx-auto">
-            Let's discuss how I can help your business achieve the same level of security and efficiency improvements.
-          </p>
-          <Link href="/contact" className="btn-primary text-lg px-8 py-4">
-            Start Your Project
-          </Link>
-        </div>
-      </main>
+      </section>
+      
       <Footer />
-    </div>
-  );
+    </main>
+  )
 }
