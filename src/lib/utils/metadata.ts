@@ -9,7 +9,7 @@ export function generatePageMetadata({
   title: string
   description: string
   path: string
-  type?: string
+  type?: "website" | "article" | "book" | "profile" | "music.song" | "music.album" | "music.playlist" | "music.radio_station" | "video.movie" | "video.episode" | "video.tv_show" | "video.other"
 }): Metadata {
   const baseUrl = 'https://tushar-portfolio.com'
   const url = `${baseUrl}${path}`

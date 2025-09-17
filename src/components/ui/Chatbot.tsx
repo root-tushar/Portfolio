@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion, useDragControls } from "framer-motion";
 import { useInteractive } from '@/components/providers/interactive-provider';
 import { X, Send, Bot } from 'lucide-react';
+import { SoundEffect } from '@/types/interactive';
 
 interface ChatbotProps {
   onClose?: () => void
@@ -38,7 +39,7 @@ export default function Chatbot({ onClose }: ChatbotProps) {
     if (!input.trim()) return;
     
     // Play sound effect
-    playSoundEffect("send" as SoundEffect);
+    playSoundEffect('send');
     
     // Add user message
     setMessages(prev => [...prev, { text: input, sender: 'user' }]);

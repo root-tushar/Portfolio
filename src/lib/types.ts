@@ -60,11 +60,13 @@ export interface CaseStudy {
 export interface PricingTier {
   id: string
   name: string
+  price: string | number
   description: string
-  price: number
   features: string[]
   isPopular?: boolean
-  category: 'ai' | 'cybersecurity'
+  category?: 'ai' | 'cybersecurity'
+  cta?: string
+  recommended?: boolean
 }
 
 export interface BlogPost {
@@ -80,16 +82,6 @@ export interface BlogPost {
   tags: string[]
   image?: string
   readingTime: string
-}
-
-export interface PricingTier {
-  id: string
-  name: string
-  price: string
-  description: string
-  features: string[]
-  recommended?: boolean
-  cta: string
 }
 
 export interface AnimationConfig {
@@ -148,15 +140,6 @@ export interface ContactForm {
 export interface LeadMagnetForm {
   email: string
   name?: string
-}
-
-export interface PricingTier {
-  name: string
-  price: string
-  description: string
-  features: string[]
-  popular?: boolean
-  cta: string
 }
 
 export interface GameState {

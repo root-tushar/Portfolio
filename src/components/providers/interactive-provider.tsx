@@ -64,7 +64,7 @@ export function InteractiveProvider({ children }: InteractiveProviderProps) {
       
       Object.entries(sounds).forEach(([key, path]) => {
         const audio = new Audio(path)
-        audio.volume = key === 'typing' ? 0.05 : 0.2 // Lower volume for typing sounds
+        audio.volume = key === 'typing' ? 0.05 : 0.2
         audio.preload = 'auto'
         newAudioCache[key] = audio
       })
@@ -82,20 +82,20 @@ export function InteractiveProvider({ children }: InteractiveProviderProps) {
     }
   }, [])
 
-  const playSoundEffect = useCallback((type: 'hover' | 'click' | 'error' | 'success' | 'typing' | 'send' | 'notification' | 'on' | 'off' | 'close') => {
+  const playSoundEffect = useCallback((type: SoundEffect) => {
     if (soundEnabled && audioCache[type]) {
       try {
-        const audio = audioCache[type];
-        audio.currentTime = 0;
-        const playPromise = audio.play();
+        const audio = audioCache[type]
+        audio.currentTime = 0
+        const playPromise = audio.play()
         
         if (playPromise !== undefined) {
           playPromise.catch(error => {
-            console.error("Audio play error:", error);
-          });
+            console.error("Audio play error:", error)
+          })
         }
       } catch (error) {
-        console.error("Error playing sound:", error);
+        console.error("Error playing sound:", error)
       }
     }
   }, [soundEnabled, audioCache])
@@ -136,7 +136,7 @@ export function InteractiveProvider({ children }: InteractiveProviderProps) {
     playSoundEffect('success')
   }, [playSoundEffect])
 
-  const value = {
+  const value: InteractiveContextType = {
     isTerminalOpen,
     isChatbotOpen,
     openTerminal,
@@ -150,43 +150,19 @@ export function InteractiveProvider({ children }: InteractiveProviderProps) {
     toggleMatrixMode
   }
 
-  // Expose context to window for Terminal and Chatbot components
+  // Expose context to window (optional, remove if not needed)
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const context: InteractiveContext = {
-        isTerminalOpen,
-        isChatbotOpen,
-        openTerminal,
-        closeTerminal,
-        openChatbot,
-        closeChatbot,
-        soundEnabled,
-        toggleSound,
-        playSoundEffect,
-        matrixMode,
-        toggleMatrixMode
-      }
+      ;(window as any).interactiveContext = value
     }
-    
     return () => {
       if (typeof window !== 'undefined') {
-        delete window.interactiveContext
+        delete (window as any).interactiveContext
       }
     }
-  }, [
-    isTerminalOpen,
-    isChatbotOpen,
-    openTerminal,
-    closeTerminal,
-    openChatbot,
-    closeChatbot,
-    soundEnabled,
-    toggleSound,
-    playSoundEffect,
-    matrixMode,
-    toggleMatrixMode
-  ])
+  }, [value])
 
+  // ✅ FIXED RETURN STATEMENT
   return (
     <InteractiveContext.Provider value={value}>
       {children}

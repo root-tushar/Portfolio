@@ -34,3 +34,16 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: "export", // 👈 required for static export
+  images: {
+    unoptimized: true, // GitHub Pages doesn’t support Next.js Image Optimization
+  },
+  basePath: "/Portfolio", // 👈 use your repo name here
+  assetPrefix: "/Portfolio/",
+};
+
+module.exports = nextConfig;
+

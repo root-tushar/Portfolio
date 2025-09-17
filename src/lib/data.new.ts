@@ -37,6 +37,7 @@ export const projects: Project[] = [
 // Services
 export const services: Service[] = [
   {
+    id: 'ai-1',
     title: 'AI Agents',
     description: 'Custom AI agents designed to automate tasks and enhance decision-making processes. Built with security-first principles.',
     icon: 'robot',
@@ -44,6 +45,7 @@ export const services: Service[] = [
     category: 'ai'
   },
   {
+    id: 'cyber-1',
     title: 'Vulnerability Scanning',
     description: 'Identify and report common security weaknesses in websites and systems with automated scanning.',
     icon: 'search',
@@ -51,6 +53,7 @@ export const services: Service[] = [
     category: 'cybersecurity'
   },
   {
+    id: 'cyber-2',
     title: 'Incident Response',
     description: 'Professional incident response and recovery planning services.',
     icon: 'shield',
@@ -170,8 +173,9 @@ export const testimonials: Testimonial[] = [
 // Pricing Tiers
 export const pricingTiers: PricingTier[] = [
   {
+    id: 'starter',
     name: 'Starter',
-    price: '$2,500',
+    price: 2500,
     description: 'Perfect for small businesses starting their security journey',
     features: [
       'Security Assessment',
@@ -180,11 +184,13 @@ export const pricingTiers: PricingTier[] = [
       'Monthly Reports',
       'Email Support'
     ],
+    category: 'cybersecurity',
     cta: 'Get Started'
   },
   {
+    id: 'pro',
     name: 'Pro',
-    price: '$7,500',
+    price: 7500,
     description: 'Comprehensive security and AI solutions for growing companies',
     features: [
       'Everything in Starter',
@@ -194,10 +200,12 @@ export const pricingTiers: PricingTier[] = [
       'Weekly Reports',
       'Priority Support'
     ],
-    recommended: true,
-    cta: 'Choose Pro'
+    isPopular: true,
+    category: 'cybersecurity',
+    cta: 'Go Pro'
   },
   {
+    id: 'enterprise',
     name: 'Enterprise',
     price: 'Custom',
     description: 'Tailored solutions for large organizations with complex needs',
@@ -209,6 +217,7 @@ export const pricingTiers: PricingTier[] = [
       'Dedicated Support',
       'Custom Integrations'
     ],
+    category: 'cybersecurity',
     cta: 'Contact Sales'
   }
 ];
