@@ -9,6 +9,8 @@ import { NeonButton } from './ui/neon-button'
 import { CyberCard } from './ui/cyber-card'
 import MatrixBackground from './ui/matrix-background'
 import { CustomCursor } from './ui/custom-cursor'
+import { MobileTouchEffects } from './ui/mobile-touch-effects'
+import { MobileHeroEffects } from './ui/mobile-hero-effects'
 import { HoverSound } from './ui/hover-sound'
 import { useState } from 'react'
 
@@ -89,11 +91,11 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
           >
-            <Link href="/contact" className="btn-primary group">
+            <Link href="/contact" className="btn-primary group mobile-pulse">
               Book Consultation
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
-            <Link href="/services" className="btn-secondary">
+            <Link href="/services" className="btn-secondary mobile-float">
               Explore Services
             </Link>
           </motion.div>
@@ -193,6 +195,8 @@ export function Hero() {
 
       {/* Interactive Elements */}
       <CustomCursor />
+      <MobileTouchEffects />
+      <MobileHeroEffects />
       <HoverSound>
         <div className="hidden">Sound Effect Wrapper</div>
       </HoverSound>

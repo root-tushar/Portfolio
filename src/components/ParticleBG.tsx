@@ -50,6 +50,9 @@ export default function ParticleBG({
     resizeCanvas()
     window.addEventListener('resize', resizeCanvas)
 
+    // Check if device is mobile
+    const isMobile = window.innerWidth <= 768 || 'ontouchstart' in window
+
     // Handle mouse movement
     const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect()
@@ -59,8 +62,26 @@ export default function ParticleBG({
       })
     }
 
+    // Handle touch movement for mobile
+    const handleTouchMove = (e: TouchEvent) => {
+      e.preventDefault()
+      const rect = canvas.getBoundingClientRect()
+      const touch = e.touches[0]
+      if (touch) {
+        setMousePos({
+          x: touch.clientX - rect.left,
+          y: touch.clientY - rect.top
+        })
+      }
+    }
+
     if (interactive) {
-      window.addEventListener('mousemove', handleMouseMove)
+      if (isMobile) {
+        canvas.addEventListener('touchmove', handleTouchMove, { passive: false })
+        canvas.addEventListener('touchstart', handleTouchMove, { passive: false })
+      } else {
+        window.addEventListener('mousemove', handleMouseMove)
+      }
     }
 
     // Particle system
@@ -176,7 +197,12 @@ export default function ParticleBG({
     return () => {
       window.removeEventListener('resize', resizeCanvas)
       if (interactive) {
-        window.removeEventListener('mousemove', handleMouseMove)
+        if (isMobile) {
+          canvas.removeEventListener('touchmove', handleTouchMove)
+          canvas.removeEventListener('touchstart', handleTouchMove)
+        } else {
+          window.removeEventListener('mousemove', handleMouseMove)
+        }
       }
       if (animationIdRef.current) {
         cancelAnimationFrame(animationIdRef.current)
