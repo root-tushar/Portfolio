@@ -1,16 +1,11 @@
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // experimental: {
   //   appDir: true,
   // },
-  output: "export", // 👈 required for static export
   images: {
     domains: ['assets.tryhackme.com', 'app.hackthebox.com'],
-    unoptimized: true, // GitHub Pages doesn’t support Next.js Image Optimization
   },
-  basePath: "/Portfolio", // 👈 use your repo name here
-  assetPrefix: "/Portfolio/",
   async headers() {
     return [
       {
@@ -38,5 +33,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
 

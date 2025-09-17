@@ -1,10 +1,12 @@
-'use client'
 
 import { ArrowLeft, Calendar, User } from 'lucide-react'
+export function generateStaticParams() {
+  const { caseStudies } = require('@/lib/data');
+  return caseStudies.map((c: { id: string }) => ({ slug: c.id }));
+}
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { notFound } from 'next/navigation'
-import { useEffect } from 'react'
 import { caseStudies } from '@/lib/data'
 import { Footer } from '@/components/Footer'
 import { Nav } from '@/components/Nav'
@@ -39,10 +41,8 @@ const fadeInUpDelayedVariants = (delay: number) => ({
   }
 })
 
+
 export default function CaseStudyPage({ params }: PageProps) {
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
 
   if (!params?.slug) {
     notFound()

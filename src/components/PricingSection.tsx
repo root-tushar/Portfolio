@@ -53,12 +53,12 @@ export function PricingSection() {
               key={tier.name}
               variants={itemVariants}
               className={`glow-card relative ${
-                tier.isPopular 
+                tier.popular 
                   ? 'ring-2 ring-accent-cta scale-105' 
                   : ''
               }`}
             >
-              {tier.isPopular && (
+              {tier.popular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                   <div className="bg-accent-cta text-background px-4 py-2 rounded-full text-sm font-semibold flex items-center">
                     <Crown className="w-4 h-4 mr-2" />

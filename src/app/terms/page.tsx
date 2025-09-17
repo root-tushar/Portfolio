@@ -1,5 +1,3 @@
-'use client'
-
 import { Nav } from '@/components/Nav'
 import { Footer } from '@/components/Footer'
 import { motion } from 'framer-motion'

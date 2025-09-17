@@ -1,7 +1,13 @@
+"use client";
+
 import "./globals.css";
 import React from "react";
+import { AnimatePresence } from "framer-motion";
 import { Inter, JetBrains_Mono } from "next/font/google";
-import { ClientLayout } from "./layout.client";
+import { InteractiveProvider } from "@/components/providers/interactive-provider";
+import Terminal from "@/components/ui/Terminal";
+import Chatbot from "@/components/ui/Chatbot";
+import { FloatingMenu } from "@/components/ui/FloatingMenu";
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -19,9 +25,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <body className="relative bg-background text-text antialiased">
-        <ClientLayout>
+        <InteractiveProvider>
           {children}
-        </ClientLayout>
+
+          {/* Interactive Elements */}
+          <AnimatePresence>
+            <Terminal />
+            <Chatbot />
+          </AnimatePresence>
+          
+          {/* Floating Menu */}
+          <FloatingMenu />
+        </InteractiveProvider>
       </body>
     </html>
   );

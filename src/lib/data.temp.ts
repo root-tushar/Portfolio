@@ -173,7 +173,6 @@ const testimonials: Testimonial[] = [
 // Pricing section
 const pricingTiers: PricingTier[] = [
   {
-    id: 'starter',
     name: 'Starter',
     price: '$2,500',
     description: 'Perfect for small businesses starting their security journey',
@@ -187,7 +186,6 @@ const pricingTiers: PricingTier[] = [
     cta: 'Get Started'
   },
   {
-    id: 'pro',
     name: 'Pro',
     price: '$7,500',
     description: 'Comprehensive security and AI solutions for growing companies',
@@ -203,7 +201,6 @@ const pricingTiers: PricingTier[] = [
     cta: 'Choose Pro'
   },
   {
-    id: 'enterprise',
     name: 'Enterprise',
     price: 'Custom',
     description: 'Tailored solutions for large organizations with complex needs',
