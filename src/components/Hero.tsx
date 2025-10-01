@@ -12,6 +12,7 @@ import { CustomCursor } from './ui/custom-cursor'
 import { MobileTouchEffects } from './ui/mobile-touch-effects'
 import { MobileHeroEffects } from './ui/mobile-hero-effects'
 import { HoverSound } from './ui/hover-sound'
+import { trackEvent } from './GoogleAnalytics'
 import { useState } from 'react'
 
 export function Hero() {
@@ -91,7 +92,11 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
           >
-            <Link href="/contact" className="btn-primary group mobile-pulse">
+            <Link 
+              href="/contact" 
+              className="btn-primary group mobile-pulse"
+              onClick={() => trackEvent('click', 'cta', 'hero_book_consultation')}
+            >
               Book Consultation
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
@@ -110,7 +115,10 @@ export function Hero() {
             <NeonButton
               variant="primary"
               size="lg"
-              onClick={() => window.location.href = '/contact'}
+              onClick={() => {
+                trackEvent('click', 'cta', 'hero_book_free_consultation')
+                window.location.href = '/contact'
+              }}
               glowColor="#2ECC71"
             >
               <span>Book Free Consultation</span>
@@ -120,7 +128,10 @@ export function Hero() {
             <NeonButton
               variant="outline"
               size="lg"
-              onClick={() => window.location.href = '/Resume (1).pdf'}
+              onClick={() => {
+                trackEvent('click', 'download', 'hero_download_resume')
+                window.location.href = '/Resume (1).pdf'
+              }}
               glowColor="#1976D2"
             >
               <Download className="w-5 h-5" />

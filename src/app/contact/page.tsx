@@ -5,6 +5,7 @@ import { Footer } from '@/components/Footer'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { Send, Calendar, MessageCircle, Shield } from 'lucide-react'
+import { trackEvent } from '@/components/GoogleAnalytics'
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -16,7 +17,8 @@ export default function ContactPage() {
   const [errors, setErrors] = useState({
     name: '',
     email: '',
-    message: ''
+    message: '',
+    submit: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -25,7 +27,8 @@ export default function ContactPage() {
     const newErrors = {
       name: '',
       email: '',
-      message: ''
+      message: '',
+      submit: ''
     }
     let isValid = true
 
@@ -59,12 +62,29 @@ export default function ContactPage() {
     }
 
     try {
-      // Here you would typically send to your API
-      await new Promise(resolve => setTimeout(resolve, 1000)) // Simulate API call
-      setIsSubmitted(true)
-      setFormData({ name: '', email: '', subject: '', message: '' })
+      const form = e.target as HTMLFormElement
+      const formData = new FormData(form)
+
+      const response = await fetch('https://formspree.io/f/mldwqjdk', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+
+      if (response.ok) {
+        // Track successful form submission
+        trackEvent('form_submit', 'contact', 'contact_form_success')
+        setIsSubmitted(true)
+        setFormData({ name: '', email: '', subject: '', message: '' })
+      } else {
+        throw new Error('Form submission failed')
+      }
     } catch (error) {
       console.error('Error submitting form:', error)
+      // Track form submission error
+      trackEvent('form_submit', 'contact', 'contact_form_error')
       setErrors(prev => ({
         ...prev,
         submit: 'Failed to submit form. Please try again.'
@@ -80,7 +100,7 @@ export default function ContactPage() {
       ...prev,
       [name]: value
     }));
-    
+
     // Clear error when user starts typing
     if (errors[name as keyof typeof errors]) {
       setErrors(prev => ({
@@ -93,7 +113,7 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen bg-background">
       <Nav />
-      
+
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-background-secondary/30">
         <div className="container-max px-4 sm:px-6 lg:px-8 text-center">
@@ -196,7 +216,15 @@ export default function ContactPage() {
             </div>
 
             {!isSubmitted ? (
-              <form onSubmit={handleSubmit} className="glow-card p-8">
+              <form
+                onSubmit={handleSubmit}
+                method="POST"
+                className="glow-card p-8"
+              >
+                {/* Hidden input for Formspree */}
+                <input type="hidden" name="_subject" value="New Contact Form Submission from Portfolio" />
+                <input type="hidden" name="_next" value="https://root-tushar.github.io/Portfolio/contact" />
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-text mb-2">
@@ -261,13 +289,20 @@ export default function ContactPage() {
                   />
                 </div>
 
+                {errors.submit && (
+                  <div className="mb-6 p-4 bg-accent-red/10 border border-accent-red/30 rounded-lg text-accent-red text-center">
+                    {errors.submit}
+                  </div>
+                )}
+
                 <div className="text-center">
                   <button
                     type="submit"
-                    className="btn-primary text-lg px-8 py-4 inline-flex items-center"
+                    disabled={isSubmitting}
+                    className="btn-primary text-lg px-8 py-4 inline-flex items-center disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <Send className="mr-2 h-5 w-5" />
-                    Send Message
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
                   </button>
                 </div>
               </form>
