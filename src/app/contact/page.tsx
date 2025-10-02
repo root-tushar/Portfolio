@@ -65,7 +65,7 @@ export default function ContactPage() {
       const form = e.target as HTMLFormElement
       const formData = new FormData(form)
 
-      const response = await fetch('https://formspree.io/f/mldwqjdk', {
+      const response = await fetch('https://formspree.io/f/xzzangyp', {
         method: 'POST',
         body: formData,
         headers: {
