@@ -27,6 +27,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             });
           `}
         </Script>
+        <Script 
+          src="https://assets.calendly.com/assets/external/widget.js" 
+          strategy="beforeInteractive" 
+        />
       </head>
       <body>
         {children}
