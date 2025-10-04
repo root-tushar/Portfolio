@@ -102,7 +102,7 @@ export function PricingSection() {
           <p className="text-text-secondary mb-4">
             Need a custom solution? Let's discuss your specific requirements.
           </p>
-          <a href="/contact" className="btn-secondary">
+          <a href="https://calendly.com/goyal-tushar1974/30min" target="_blank" rel="noopener noreferrer" className="btn-secondary">
             Schedule a Call
           </a>
         </motion.div>

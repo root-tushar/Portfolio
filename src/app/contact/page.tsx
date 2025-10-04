@@ -153,7 +153,7 @@ export default function ContactPage() {
                 Book a 30-minute call to discuss your security needs and AI goals.
               </p>
               <a
-                href="https://calendly.com/your-calendar"
+                href="https://calendly.com/goyal-tushar1974/30min"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary"
