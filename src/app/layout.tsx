@@ -43,6 +43,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           src="https://assets.calendly.com/assets/external/widget.js" 
           strategy="beforeInteractive" 
         />
+        
+        {/* Google AdSense */}
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1562472264903123"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
       </head>
       <body>
         {/* Google Tag Manager (noscript) */}
