@@ -13,7 +13,7 @@ interface ChatbotProps {
 export default function Chatbot({ onClose }: ChatbotProps) {
   const { isChatbotOpen, closeChatbot, playSoundEffect } = useInteractive();
   const [messages, setMessages] = useState<Array<{text: string, sender: 'user' | 'bot'}>>([
-    { text: "Hello! How can I assist you with your cybersecurity needs today?", sender: 'bot' }
+    { text: "Hi! I'm Tushar's AI assistant. Ask me about his services, experience in cybersecurity and AI, or anything else you'd like to know!", sender: 'bot' }
   ]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -35,29 +35,48 @@ export default function Chatbot({ onClose }: ChatbotProps) {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  const sendMessage = () => {
+  const sendMessage = async () => {
     if (!input.trim()) return;
     
     // Play sound effect
     playSoundEffect("send" as SoundEffect);
     
     // Add user message
-    setMessages(prev => [...prev, { text: input, sender: 'user' }]);
+    const userMessage = input;
+    setMessages(prev => [...prev, { text: userMessage, sender: 'user' }]);
     setInput(""); // clear after sending
+    setIsTyping(true);
     
-    // Simulate bot response after a short delay
-    setTimeout(() => {
-      const responses = [
-        "I can help you with that cybersecurity challenge.",
-        "That's an interesting question about AI security.",
-        "Let me analyze that security concern for you.",
-        "I'd recommend implementing additional authentication layers for that.",
-        "Your portfolio website is looking great! Any specific security features you'd like to add?"
-      ];
-      const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-      setMessages(prev => [...prev, { text: randomResponse, sender: 'bot' }]);
+    try {
+      // Call the API endpoint that connects to n8n
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: userMessage,
+        }),
+      });
+
+      const data = await response.json();
+      
+      if (response.ok) {
+        setMessages(prev => [...prev, { text: data.reply, sender: 'bot' }]);
+        playSoundEffect('notification');
+      } else {
+        throw new Error(data.error || 'Failed to get response');
+      }
+    } catch (error) {
+      console.error('Chat error:', error);
+      setMessages(prev => [...prev, { 
+        text: "Sorry, I'm having trouble connecting right now. Please try again later.", 
+        sender: 'bot' 
+      }]);
       playSoundEffect('notification');
-    }, 1000);
+    } finally {
+      setIsTyping(false);
+    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
