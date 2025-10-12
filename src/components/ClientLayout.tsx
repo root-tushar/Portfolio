@@ -6,6 +6,7 @@ import { InteractiveProvider } from "@/components/providers/interactive-provider
 import Terminal from "@/components/ui/Terminal";
 import Chatbot from "@/components/ui/Chatbot";
 import { FloatingMenu } from "@/components/ui/FloatingMenu";
+import { ChatbotButton } from "@/components/ui/ChatbotButton";
 
 export function ClientLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -20,6 +21,9 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
       
       {/* Floating Menu */}
       <FloatingMenu />
+      
+      {/* Dedicated Chatbot Button - Always Visible */}
+      <ChatbotButton />
     </InteractiveProvider>
   );
 }

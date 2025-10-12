@@ -48,6 +48,8 @@ export default function Chatbot({ onClose }: ChatbotProps) {
     setIsTyping(true);
     
     try {
+      console.log('Sending message to API:', userMessage);
+      
       // Call the API endpoint that connects to n8n
       const response = await fetch('/api/chat', {
         method: 'POST',
@@ -60,6 +62,7 @@ export default function Chatbot({ onClose }: ChatbotProps) {
       });
 
       const data = await response.json();
+      console.log('API response:', data);
       
       if (response.ok) {
         setMessages(prev => [...prev, { text: data.reply, sender: 'bot' }]);

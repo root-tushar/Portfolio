@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Terminal, Bot, Volume2, VolumeX } from 'lucide-react';
+import { useState } from 'react';
+import { Terminal, Bot, Volume2, VolumeX, MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInteractive } from '@/components/providers/interactive-provider';
 
@@ -21,7 +21,12 @@ export function FloatingMenu() {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleMenu = () => {
-    setIsExpanded(!isExpanded);
+    // Instead of expanding menu, directly open chatbot
+    if (isChatbotOpen) {
+      closeChatbot();
+    } else {
+      openChatbot();
+    }
     playSoundEffect('click');
   };
 
@@ -63,18 +68,13 @@ export function FloatingMenu() {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
       >
-        <div className="w-6 h-6 flex items-center justify-center">
-          <span className="block w-1 h-1 bg-accent-cta rounded-full"></span>
-          <span className="block w-1 h-1 bg-accent-cta rounded-full ml-1"></span>
-          <span className="block w-1 h-1 bg-accent-cta rounded-full ml-1"></span>
-        </div>
+        <MessageCircle className="w-6 h-6" />
       </motion.button>
 
-      {/* Menu items */}
+      {/* Menu items - HIDDEN (keeping code but not displaying) 
       <AnimatePresence>
         {isExpanded && (
           <>
-            {/* Terminal button */}
             <motion.button
               initial={{ opacity: 0, y: 0 }}
               animate={{ opacity: 1, y: -60 }}
@@ -87,7 +87,6 @@ export function FloatingMenu() {
               <Terminal className="w-5 h-5" />
             </motion.button>
 
-            {/* Chatbot button */}
             <motion.button
               initial={{ opacity: 0, y: 0 }}
               animate={{ opacity: 1, y: -120 }}
@@ -100,7 +99,6 @@ export function FloatingMenu() {
               <Bot className="w-5 h-5" />
             </motion.button>
 
-            {/* Sound toggle button */}
             <motion.button
               initial={{ opacity: 0, y: 0 }}
               animate={{ opacity: 1, y: -180 }}
@@ -115,6 +113,7 @@ export function FloatingMenu() {
           </>
         )}
       </AnimatePresence>
+      */}
     </div>
   );
 }
