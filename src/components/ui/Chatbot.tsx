@@ -10,6 +10,11 @@ interface ChatbotProps {
   onClose?: () => void
 }
 
+// Generate unique user ID for this chat session
+function generateUserId() {
+  return `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+}
+
 export default function Chatbot({ onClose }: ChatbotProps) {
   const { isChatbotOpen, closeChatbot, playSoundEffect } = useInteractive();
   const [messages, setMessages] = useState<Array<{text: string, sender: 'user' | 'bot'}>>([
@@ -17,6 +22,7 @@ export default function Chatbot({ onClose }: ChatbotProps) {
   ]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [userId] = useState(() => generateUserId()); // Persistent user ID
   const inputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const dragControls = useDragControls();
@@ -49,6 +55,7 @@ export default function Chatbot({ onClose }: ChatbotProps) {
     
     try {
       console.log('Sending message to API:', userMessage);
+      console.log('User ID:', userId);
       
       // Call the API endpoint that connects to n8n
       const response = await fetch('/api/chat', {
@@ -57,7 +64,8 @@ export default function Chatbot({ onClose }: ChatbotProps) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          message: userMessage,
+          userMessage: userMessage,
+          userId: userId, // Include user ID for context
         }),
       });
 
@@ -65,6 +73,7 @@ export default function Chatbot({ onClose }: ChatbotProps) {
       console.log('API response:', data);
       
       if (response.ok) {
+        // Display the "reply" field from n8n response
         setMessages(prev => [...prev, { text: data.reply, sender: 'bot' }]);
         playSoundEffect('notification');
       } else {

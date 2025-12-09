@@ -1,0 +1,265 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                    n8n CHATBOT PIPELINE - VISUAL GUIDE                      ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                              THE COMPLETE FLOW                              │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+    Frontend (Chatbot.tsx)
+           │
+           │ POST /api/chat
+           │ { userMessage: "Hello", userId: "user_123" }
+           ▼
+    API Route (route.ts)
+           │
+           │ POST to n8n webhook
+           │ { chatInput: "Hello", userId: "user_123" }
+           ▼
+    ┌──────────────────────────────────────────────────────────────┐
+    │                        n8n WORKFLOW                          │
+    │                                                              │
+    │  ┌─────────────┐      ┌─────────────┐      ┌─────────────┐ │
+    │  │  Webhook    │─────▶│  LLM/AI     │─────▶│  Respond to │ │
+    │  │  Trigger    │      │  Agent      │      │  Webhook    │ │
+    │  └─────────────┘      └─────────────┘      └─────────────┘ │
+    │       │                     │                     │         │
+    │       │                     │                     │         │
+    │   Receives:             Processes:            Returns:      │
+    │   {                     chatInput             {             │
+    │     chatInput,          with AI               "reply": "…"  │
+    │     userId                                    }             │
+    │   }                                                         │
+    │                                                              │
+    └──────────────────────────────────────────────────────────────┘
+           │
+           │ { "reply": "AI response text" }
+           ▼
+    API Route (route.ts)
+           │
+           │ Extracts data.reply
+           │ { "reply": "AI response text" }
+           ▼
+    Frontend (Chatbot.tsx)
+           │
+           │ Displays data.reply
+           ▼
+    User sees: "AI response text"
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         n8n NODE CONFIGURATIONS                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+╔═══════════════════════════════════════════════════════════════════════════╗
+║ NODE 1: WEBHOOK TRIGGER                                                   ║
+╠═══════════════════════════════════════════════════════════════════════════╣
+║                                                                           ║
+║  Settings:                                                                ║
+║  ┌─────────────────────────────────────────────────────────────────────┐ ║
+║  │ HTTP Method:        POST                                            │ ║
+║  │ Path:               /webhook-test/chatbot                           │ ║
+║  │ Response Mode:      ✓ Respond to Webhook                           │ ║
+║  │ Response Data:      Last Node                                       │ ║
+║  └─────────────────────────────────────────────────────────────────────┘ ║
+║                                                                           ║
+║  Receives:                                                                ║
+║  {                                                                        ║
+║    "chatInput": "user message",                                          ║
+║    "userId": "user_123"                                                  ║
+║  }                                                                        ║
+║                                                                           ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+                                    │
+                                    ▼
+
+╔═══════════════════════════════════════════════════════════════════════════╗
+║ NODE 2: LLM/AI AGENT                                                      ║
+╠═══════════════════════════════════════════════════════════════════════════╣
+║                                                                           ║
+║  Configuration (example for OpenAI Chat Model):                          ║
+║  ┌─────────────────────────────────────────────────────────────────────┐ ║
+║  │ Model:              gpt-3.5-turbo                                   │ ║
+║  │ Messages:                                                           │ ║
+║  │   - Role:           user                                            │ ║
+║  │   - Content:        ={{ $json.chatInput }}                         │ ║
+║  └─────────────────────────────────────────────────────────────────────┘ ║
+║                                                                           ║
+║  Input:  { chatInput: "user message", userId: "user_123" }              ║
+║  Output: { text: "AI generated response", usage: {...} }                ║
+║           ^^^^                                                            ║
+║           This is the field you need!                                    ║
+║                                                                           ║
+║  Common output fields by node type:                                      ║
+║  • OpenAI Chat Model    → text                                           ║
+║  • AI Agent             → output                                         ║
+║  • Basic LLM Chain      → text                                           ║
+║  • Conversational Agent → output                                         ║
+║                                                                           ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+                                    │
+                                    ▼
+
+╔═══════════════════════════════════════════════════════════════════════════╗
+║ NODE 3: RESPOND TO WEBHOOK                                                ║
+╠═══════════════════════════════════════════════════════════════════════════╣
+║                                                                           ║
+║  ⚠️  CRITICAL: This is where the error happens!                          ║
+║                                                                           ║
+║  Settings:                                                                ║
+║  ┌─────────────────────────────────────────────────────────────────────┐ ║
+║  │ Response Mode:      Using Fields Below                             │ ║
+║  │ Response Data:      Last Node                                       │ ║
+║  └─────────────────────────────────────────────────────────────────────┘ ║
+║                                                                           ║
+║  Response Body (choose based on your LLM output field):                  ║
+║                                                                           ║
+║  ┌─────────────────────────────────────────────────────────────────────┐ ║
+║  │ For OpenAI Chat Model (outputs "text"):                            │ ║
+║  │                                                                     │ ║
+║  │ {                                                                   │ ║
+║  │   "reply": "={{ $json.text }}"                                     │ ║
+║  │ }                                                                   │ ║
+║  └─────────────────────────────────────────────────────────────────────┘ ║
+║                                                                           ║
+║  ┌─────────────────────────────────────────────────────────────────────┐ ║
+║  │ For AI Agent (outputs "output"):                                   │ ║
+║  │                                                                     │ ║
+║  │ {                                                                   │ ║
+║  │   "reply": "={{ $json.output }}"                                   │ ║
+║  │ }                                                                   │ ║
+║  └─────────────────────────────────────────────────────────────────────┘ ║
+║                                                                           ║
+║  ┌─────────────────────────────────────────────────────────────────────┐ ║
+║  │ Universal (works with any LLM):                                     │ ║
+║  │                                                                     │ ║
+║  │ {                                                                   │ ║
+║  │   "reply": "={{ $json.output || $json.text || $json.response }}"  │ ║
+║  │ }                                                                   │ ║
+║  └─────────────────────────────────────────────────────────────────────┘ ║
+║                                                                           ║
+║  Returns to API:                                                          ║
+║  {                                                                        ║
+║    "reply": "AI generated response text"                                 ║
+║  }                                                                        ║
+║                                                                           ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         EXPRESSION SYNTAX RULES                             │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+  ❌ WRONG:                          ✅ CORRECT:
+  
+  "reply": "{{ $json.output }}"     "reply": "={{ $json.output }}"
+           ^                                 ^
+           Missing =                         Has = after quote
+  
+  "reply": {{ $json.output }}       "reply": "={{ $json.output }}"
+           ^                                 ^
+           Not in quotes                     Wrapped in quotes
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                      ALTERNATIVE: USE SET NODE (SAFER)                      │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+    ┌─────────────┐      ┌─────────────┐      ┌─────────────┐      ┌─────────────┐
+    │  Webhook    │─────▶│  LLM/AI     │─────▶│  Set Node   │─────▶│  Respond to │
+    │  Trigger    │      │  Agent      │      │  (NEW)      │      │  Webhook    │
+    └─────────────┘      └─────────────┘      └─────────────┘      └─────────────┘
+                                                     │
+                                                     │
+                                              Normalizes output:
+                                              Field: reply
+                                              Value: ={{ $json.output || $json.text }}
+                                                     │
+                                                     ▼
+                                              Now you always have
+                                              $json.reply available!
+
+  Then in Respond to Webhook, simply use:
+  
+  {
+    "reply": "={{ $json.reply }}"
+  }
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                            TESTING COMMANDS                                 │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+  Test n8n directly:
+  ┌─────────────────────────────────────────────────────────────────────────┐
+  │ curl -X POST http://localhost:5678/webhook-test/chatbot \              │
+  │   -H "Content-Type: application/json" \                                │
+  │   -d '{"chatInput":"Hello","userId":"test"}'                           │
+  └─────────────────────────────────────────────────────────────────────────┘
+  
+  Expected response:
+  {
+    "reply": "Hello! Welcome to Tushar's portfolio..."
+  }
+
+  Test API route:
+  ┌─────────────────────────────────────────────────────────────────────────┐
+  │ curl -X POST http://localhost:3000/api/chat \                          │
+  │   -H "Content-Type: application/json" \                                │
+  │   -d '{"userMessage":"Hello","userId":"test"}'                         │
+  └─────────────────────────────────────────────────────────────────────────┘
+
+  Or use the test script:
+  ┌─────────────────────────────────────────────────────────────────────────┐
+  │ node test-n8n-pipeline.js                                              │
+  └─────────────────────────────────────────────────────────────────────────┘
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                         TROUBLESHOOTING CHECKLIST                           │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+  □ n8n is running (check http://localhost:5678)
+  □ Webhook node set to "Respond to Webhook" mode
+  □ Response Data set to "Last Node" (not "First Incoming Data")
+  □ LLM node receives ={{ $json.chatInput }} as input
+  □ LLM node executes successfully (check execution log)
+  □ Identified correct output field (text/output/response)
+  □ Respond to Webhook uses "={{ ... }}" syntax (with = and quotes)
+  □ Direct curl test returns { "reply": "..." }
+  □ API route logs show successful n8n response
+  □ N8N_WEBHOOK_URL in .env.local is correct
+
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                              QUICK FIXES                                    │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+  Problem: "Invalid JSON in Response Body"
+  Fix: Use "={{ $json.FIELD }}" not "{{ $json.FIELD }}"
+
+  Problem: "reply is undefined"
+  Fix: Check LLM output field name, use correct field in Respond to Webhook
+
+  Problem: Returns webhook input instead of LLM output
+  Fix: Set Response Data to "Last Node"
+
+  Problem: Not sure which field to use
+  Fix: Add Set node with: ={{ $json.output || $json.text || $json.response }}
+
+
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                           FINAL ANSWER                                    ║
+╠═══════════════════════════════════════════════════════════════════════════╣
+║                                                                           ║
+║  In your n8n "Respond to Webhook" node, paste this:                      ║
+║                                                                           ║
+║  {                                                                        ║
+║    "reply": "={{ $json.output || $json.text || $json.response }}"       ║
+║  }                                                                        ║
+║                                                                           ║
+║  This works with ANY LLM node type and includes fallbacks.               ║
+║                                                                           ║
+╚═══════════════════════════════════════════════════════════════════════════╝
