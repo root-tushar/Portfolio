@@ -306,7 +306,7 @@ export const pricingTiers: PricingTier[] = [
   {
     id: 'starter',
     name: 'Starter',
-    price: '$2,500',
+    price: '₹2,500',
     description: 'Perfect for small businesses starting their security journey',
     features: [
       'Security Assessment',
@@ -320,7 +320,7 @@ export const pricingTiers: PricingTier[] = [
   {
     id: 'pro',
     name: 'Pro',
-    price: '$7,500',
+    price: '₹7,500',
     description: 'Comprehensive security and AI solutions for growing companies',
     features: [
       'Everything in Starter',

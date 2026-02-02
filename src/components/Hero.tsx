@@ -57,21 +57,14 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6 text-text"
+            style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
           >
-            Protect & Automate Your Business in{' '}
-            <span className="text-gradient relative inline-block">
-              30 Days
-              <motion.span
-                className="absolute -inset-1 rounded-lg opacity-50 blur-xl bg-gradient-to-r from-accent-emerald to-accent-blue"
-                animate={{
-                  opacity: [0.3, 0.6, 0.3],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
-              />
+            Protect & Automate{' '}
+            <span className="block mt-2 ml-8 text-accent-emerald" style={{ fontStyle: 'italic', fontWeight: 600 }}>
+              Your Business
+            </span>
+            <span className="text-gradient relative inline-block mt-3">
+              in 30 Days
             </span>
           </motion.h1>
 
@@ -81,6 +74,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl sm:text-2xl text-text-secondary mb-12 max-w-3xl mx-auto font-light"
+            style={{ letterSpacing: '0.3px' }}
           >
             AI agents + Cyber defense that cut costs and risks — built by one dedicated expert.
           </motion.p>
@@ -91,16 +85,18 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
+            style={{ marginLeft: '-12px' }}
           >
             <Link 
               href="/contact" 
               className="btn-primary group mobile-pulse"
               onClick={() => trackEvent('click', 'cta', 'hero_book_consultation')}
+              style={{ transform: 'rotate(-1deg)' }}
             >
               Book Consultation
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
-            <Link href="/services" className="btn-secondary mobile-float">
+            <Link href="/services" className="btn-secondary mobile-float" style={{ transform: 'rotate(0.5deg)' }}>
               Explore Services
             </Link>
           </motion.div>
@@ -145,18 +141,19 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
             className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12"
+            style={{ marginTop: '2rem', marginBottom: '1rem' }}
           >
-            <CyberCard className="p-6" glowColor="#2ECC71">
+            <CyberCard className="p-6" glowColor="#2ECC71" style={{ transform: 'rotate(-0.5deg)' }}>
               <h3 className="text-xl font-mono text-accent-emerald mb-2">Top 1%</h3>
               <p className="text-text-secondary">TryHackMe Rank</p>
             </CyberCard>
 
-            <CyberCard className="p-6" glowColor="#E53935">
+            <CyberCard className="p-6" glowColor="#E53935" style={{ transform: 'rotate(0.3deg)' }}>
               <h3 className="text-xl font-mono text-accent-red mb-2">Pro Hacker</h3>
               <p className="text-text-secondary">HackTheBox Status</p>
             </CyberCard>
 
-            <CyberCard className="p-6" glowColor="#1976D2">
+            <CyberCard className="p-6" glowColor="#1976D2" style={{ transform: 'rotate(-0.2deg)' }}>
               <h3 className="text-xl font-mono text-accent-blue mb-2">50+ Hours</h3>
               <p className="text-text-secondary">Lab Practice</p>
             </CyberCard>

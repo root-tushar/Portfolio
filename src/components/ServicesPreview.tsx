@@ -69,11 +69,12 @@ export function ServicesPreview() {
                 "glow-card group cursor-pointer transform transition-all duration-300",
                 "hover:scale-105 hover:shadow-xl hover:shadow-accent-red/20"
               )}
+              style={{ transform: `rotate(${(index % 2 === 0 ? -0.5 : 0.5)}deg)` }}
             >
               <div className="text-6xl mb-4 text-center group-hover:scale-110 transition-transform duration-300">
                 {iconMap[service.icon] || '🔧'}
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-center group-hover:text-accent-red transition-colors duration-300">
+              <h3 className="text-2xl font-bold mb-4 text-center group-hover:text-accent-red transition-colors duration-300" style={{ fontStyle: index % 3 === 0 ? 'italic' : 'normal' }}>
                 {service.title}
               </h3>
               <p className="text-text-secondary text-center leading-relaxed">

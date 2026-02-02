@@ -57,6 +57,7 @@ export function PricingSection() {
                   ? 'ring-2 ring-accent-cta scale-105' 
                   : ''
               }`}
+              style={{ transform: `rotate(${(index === 0 ? -0.8 : index === 2 ? 0.8 : 0)}deg)` }}
             >
               {tier.isPopular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
