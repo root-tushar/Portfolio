@@ -143,20 +143,26 @@ export function Hero() {
             className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12"
             style={{ marginTop: '2rem', marginBottom: '1rem' }}
           >
-            <CyberCard className="p-6" glowColor="#2ECC71" style={{ transform: 'rotate(-0.5deg)' }}>
-              <h3 className="text-xl font-mono text-accent-emerald mb-2">Top 1%</h3>
-              <p className="text-text-secondary">TryHackMe Rank</p>
-            </CyberCard>
+            <div style={{ transform: 'rotate(-0.5deg)' }}>
+              <CyberCard className="p-6" glowColor="#2ECC71">
+                <h3 className="text-xl font-mono text-accent-emerald mb-2">Top 1%</h3>
+                <p className="text-text-secondary">TryHackMe Rank</p>
+              </CyberCard>
+            </div>
 
-            <CyberCard className="p-6" glowColor="#E53935" style={{ transform: 'rotate(0.3deg)' }}>
-              <h3 className="text-xl font-mono text-accent-red mb-2">Pro Hacker</h3>
-              <p className="text-text-secondary">HackTheBox Status</p>
-            </CyberCard>
+            <div style={{ transform: 'rotate(0.3deg)' }}>
+              <CyberCard className="p-6" glowColor="#E53935">
+                <h3 className="text-xl font-mono text-accent-red mb-2">Pro Hacker</h3>
+                <p className="text-text-secondary">HackTheBox Status</p>
+              </CyberCard>
+            </div>
 
-            <CyberCard className="p-6" glowColor="#1976D2" style={{ transform: 'rotate(-0.2deg)' }}>
-              <h3 className="text-xl font-mono text-accent-blue mb-2">50+ Hours</h3>
-              <p className="text-text-secondary">Lab Practice</p>
-            </CyberCard>
+            <div style={{ transform: 'rotate(-0.2deg)' }}>
+              <CyberCard className="p-6" glowColor="#1976D2">
+                <h3 className="text-xl font-mono text-accent-blue mb-2">50+ Hours</h3>
+                <p className="text-text-secondary">Lab Practice</p>
+              </CyberCard>
+            </div>
           </motion.div>
 
           {/* Social Links */}
