@@ -52,11 +52,10 @@ export function PricingSection() {
             <motion.div
               key={tier.name}
               variants={itemVariants}
-              className={`glow-card relative ${
-                tier.isPopular 
-                  ? 'ring-2 ring-accent-cta scale-105' 
-                  : ''
-              }`}
+              className={`glow-card relative ${tier.isPopular
+                ? 'ring-2 ring-accent-cta scale-105'
+                : ''
+                }`}
               style={{ transform: `rotate(${(index === 0 ? -0.8 : index === 2 ? 0.8 : 0)}deg)` }}
             >
               {tier.isPopular && (
